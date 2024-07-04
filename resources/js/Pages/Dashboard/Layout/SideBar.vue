@@ -50,18 +50,26 @@ export default {
                     icon: HomeIcon,
                     routeGroup: 'dashboard.index',
                 },
-                professors: {
-                    name: 'Professor',
-                    href: this.route('dashboard.professors.index'),
+                users: {
+                    name: 'User',
+                    href: this.route('dashboard.users.index'),
                     icon: UserIcon,
-                    routeGroup: 'dashboard.professors.*',
+                    routeGroup: 'dashboard.users.*',
                 },
-                subjects: {
-                    name: 'Subject',
-                    href: this.route('dashboard.subjects.index'),
-                    icon: BookOpenIcon,
-                    routeGroup: 'dashboard.subjects.*',
-                }
+
+
+                // professors: {
+                //     name: 'Professor',
+                //     href: this.route('dashboard.professors.index'),
+                //     icon: UserIcon,
+                //     routeGroup: 'dashboard.professors.*',
+                // },
+                // subjects: {
+                //     name: 'Subject',
+                //     href: this.route('dashboard.subjects.index'),
+                //     icon: BookOpenIcon,
+                //     routeGroup: 'dashboard.subjects.*',
+                // }
             }
 
         }
@@ -70,8 +78,9 @@ export default {
         availableNavs() {
             const navs = [];
             navs.push(this.navs.dashboard);
-            navs.push(this.navs.professors);
-            navs.push(this.navs.subjects);
+            navs.push(this.navs.users);
+            // navs.push(this.navs.professors);
+            // navs.push(this.navs.subjects);
             return navs;
         }
     },
