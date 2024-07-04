@@ -8,7 +8,7 @@ use App\Http\Controllers\Dashboard\SubjectController;
 use App\Http\Controllers\Dashboard\ProfessorController;
 
 
-Route::middleware(['auth:sanctum', 'role:admin,manager'])->group(function () {
+Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::prefix('dashboard')->as('dashboard.')->group(function () {
         Route::get('/', [PageController::class, 'dashboard'])->name('index');
 

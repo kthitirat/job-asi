@@ -19,10 +19,11 @@ class UserSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@admin.com'
         ]);
+
         User::factory()->create([
             'role_id' => Role::where('name', 'admin')->first()->id,
-            'name' => 'sutjapong',
-            'email' => 'sutjapong.p@gmail.com'
+            'name' => 'cherry',
+            'email' => 'cherry@aru.ac.th'
         ]);
 //        User::factory()->create([
 //            'role_id' => Role::where('name', 'manager')->first()->id,
@@ -34,6 +35,7 @@ class UserSeeder extends Seeder
 //            'name' => 'user',
 //            'email' => 'user@user.com'
 //        ]);
-//        User::factory()->count(10)->create();
+
+        User::factory()->count(10)->create();
     }
 }

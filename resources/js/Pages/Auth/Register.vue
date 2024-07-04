@@ -36,7 +36,7 @@ const submit = () => {
                 <InputLabel for="name" value="Name"/>
                 <input id="name" v-model="form.name" autocomplete="name"
                        autofocus class="input input-bordered w-full"
-                       placeholder="Type here"
+                       placeholder="ผู้ประสานงานประจำสถาบัน"
                        required type="text"/>
                 <InputError :message="form.errors.name" class="mt-2"/>
             </div>
