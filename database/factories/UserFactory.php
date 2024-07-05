@@ -24,7 +24,9 @@ class UserFactory extends Factory
         return [
             'role_id' => Role::where('name', 'user')->first()->id,
             'name' => $this->faker->name(),
+            'institution' => $this->faker->company(),
             'email' => $this->faker->unique()->safeEmail(),
+            'tel' => $this->faker->numerify('0#########'),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'two_factor_secret' => null,

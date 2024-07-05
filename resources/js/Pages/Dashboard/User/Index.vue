@@ -6,9 +6,9 @@
                 <tr class="bg-white border-b">
                     <th class="px-6 py-3">#</th>
                     <th class="px-6 py-3">Name</th>
-                    <th class="px-6 py-3">organization</th>
-                    <th class="px-6 py-3">Tel</th>                    
+                    <th class="px-6 py-3">organization</th>                   
                     <th class="px-6 py-3">Email</th>
+                    <th class="px-6 py-3">Tel</th> 
                     <th class="px-6 py-3">Role</th>
                     <th class="px-6 py-3">Action</th>
                 </tr>
@@ -24,7 +24,7 @@
                     </td>
 
                     <td>
-                        หน่วยงาน
+                        {{ user.institution }}
                     </td>
 
                     <td>
@@ -32,7 +32,7 @@
                     </td>
 
                     <td>
-                       เบอร์โทร
+                        {{ user.tel }}
                     </td>
 
                     <td>
