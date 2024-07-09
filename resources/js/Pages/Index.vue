@@ -1,6 +1,6 @@
 <template>
     <Layout>
-        <div class="card shadow-xl flex items-center justify-center">
+        <div v-if="$page.props.user" class="card shadow-xl flex items-center justify-center">
             <figure>
                 <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" >
             </figure>
@@ -22,7 +22,7 @@ import Layout from "@/Pages/Layout/Layout.vue";
 //import TeachingMaterialCard from "@/Pages/Components/TeachingMaterialCard.vue";
 //import axios from 'axios';
 import {Link} from "@inertiajs/vue3";
-//import {router} from "@inertiajs/vue3";
+import {router} from "@inertiajs/vue3";
 
 export default {
     name: "Index",

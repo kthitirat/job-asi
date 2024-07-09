@@ -570,68 +570,77 @@ export default {
     name: "Form",
     components: {Layout, Link},
     props: {
-        
+        performance:{
+            type: Object,
+            required: true
+        }
     },
     data() {
         return {
             isSubmitting:false,
             form: useForm({
+                performance_id: this.performance.id ?? null,
                 institution: this.$page.props.user.institution,     
-                email: this.$page.props.user.email,
-                institution_head_name: null,
-                institution_head_position: null,
-                coordinator_name: this.$page.props.user.name, 
-                coordinator_position: null,                           
-                coordinator_phone: this.$page.props.user.tel,                
-                name: null,
-                type: [],
-                description: null,
-                duration: null,
-                number_of_performers: null,
-                directors: null,            
-                performers: null,
-                musicians_or_narrators: null,
-                number_of_musicians: null,
-                opening_scene: null,
-                stage_performance: null,
-                ending_scene: null,
-                costume_and_props: null,
-                stage_lighting: null,
-                sound_type: null,
-                number_of_microphones: null,
-                number_of_amplifiers: null,
-                other_specifications: null,
-                sound_control: null,
-                institution_representatives: null,
-                faculty_and_staff: null,
-                students: null,
-                vehicles: null,
-                arrival_date: null,
-                arrival_time: null,
-                departure_date: null,
-                departure_time: null,
-                accommodation: null,
-                ceremony_and_reception_details: null,
-                number_of_institution_heads: null,
-                number_of_faculty_and_staff: null,
-                number_of_students: null                
+                email: this.$page.props.user.email,               
+                coordinator_name: this.$page.props.user.name,                                         
+                coordinator_phone: this.$page.props.user.tel,   
+                institution_head_name: this.performance.institution_head_name,
+                institution_head_position: this.performance.institution_head_position,   
+                coordinator_position: this.performance.coordinator_position,           
+                name: this.performance.name,
+                type: this.performance.type,
+                description: this.performance.description,
+                duration: this.performance.duration,
+                number_of_performers: this.performance.number_of_performers,
+                directors: this.performance.directors,            
+                performers: this.performance.performers,
+                musicians_or_narrators: this.performance.musicians_or_narrators,
+                number_of_musicians: this.performance.number_of_musicians,
+                opening_scene: this.performance.opening_scene,
+                stage_performance: this.performance.stage_performance,
+                ending_scene: this.performance.ending_scene,
+                costume_and_props: this.performance.costume_and_props,
+                stage_lighting: this.performance.stage_lighting,
+                sound_type: this.performance.sound_type,
+                number_of_microphones: this.performance.number_of_microphones,
+                number_of_amplifiers: this.performance.number_of_amplifiers,
+                other_specifications: this.performance.other_specifications,
+                sound_control: this.performance.sound_control,
+                institution_representatives: this.performance.institution_representatives,
+                faculty_and_staff: this.performance.faculty_and_staff,
+                students: this.performance.students,
+                vehicles: this.performance.vehicles,
+                arrival_date: this.performance.arrival_date,
+                arrival_time: this.performance.arrival_time,
+                departure_date: this.performance.departure_date,
+                departure_time: this.performance.departure_time,
+                accommodation: this.performance.accommodation,
+                ceremony_and_reception_details: this.performance.ceremony_and_reception_details,
+                number_of_institution_heads: this.performance.number_of_institution_heads,
+                number_of_faculty_and_staff: this.performance.number_of_faculty_and_staff,
+                number_of_students: this.performance.number_of_students               
                 
             }),
       
         };
     },
-    mounted() {},
-        methods: {
-            async saveDraft(){
-                this.isSubmitting = true;
-                const url = this.route('save_draft');
-                const res = await axios.post(url, this.form);
+    mounted() {
 
-                // console.log('----------------');
-                // console.log('sdfddfdfd');
-                // console.log('----------------');
+    },
+
+    methods: {
+        async saveDraft() {
+            this.isSubmitting = true;
+            const url = this.route('save_draft');
+            const res = await axios.post(url, this.form);
+            if (res.status === 200) {
+                this.isSubmitting = false;
+                //this.dirtyForm = false;
+                //this.performanceId = res.data.performance_id;
+                return;
             }
-        },
+        },    
+    },
  
 };
 

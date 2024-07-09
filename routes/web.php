@@ -8,6 +8,7 @@ use App\Http\Controllers\AnnouncementController;
 use Laravel\Fortify\Features;
 use App\Http\Controllers\SubjectController;
 
+
 //Route::get('/login', [PageController::class, 'login'])
 //    ->name('login');
 //Route::post('/login', [PageController::class, 'doLogin']);
@@ -29,7 +30,7 @@ Route::post('/form/save-draft', [PageController::class, 'saveDraft'])->name('sav
 
 
 
-Route::resource('/subjects', SubjectController::class);
+//Route::resource('/subjects', SubjectController::class);
 //Route::get('/announcements', [AnnouncementController::class, 'index'])->name('announcements.index');
 //Route::get('/get-all-announcements-type', [AnnouncementController::class, 'getAllAnnouncementTypes'])->name(
 //    'announcements.get_all_announcement_types'
