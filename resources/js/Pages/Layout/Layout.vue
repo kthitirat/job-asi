@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white min-h-screen">
+    <div class="bg-gray-50 min-h-screen">
         <Nav/>
         <section id="content" class="text-gray-800 z-0 py-10 px-4 md:px-8 lg:px-10 xl:px-16 min-h-screen">
             <main>

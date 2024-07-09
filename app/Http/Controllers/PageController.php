@@ -30,6 +30,16 @@ class PageController extends Controller
         ]);
     }
 
+    public function form()
+    {       
+        return Inertia::render('Form');
+    }
+
+    public function saveDraft(Request $request)
+    {
+        dd($request);
+    }
+
     public function dashboard()
     {
         $user = Auth::user();

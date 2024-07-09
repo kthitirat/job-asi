@@ -18,7 +18,7 @@
                     class="bg-white border-b">
                     <th class="text-center">{{ user.id }}</th>
                     <td class="px-6 py-4">
-                        <Link :href="route('dashboard.users.edit',user.id)">
+                        <Link :href="route('dashboard.users.edit',user.id)" class="underline">
                             {{ user.name }}
                         </Link>
                     </td>

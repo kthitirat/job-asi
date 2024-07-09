@@ -22,6 +22,13 @@ Route::get('/', [PageController::class, 'index'])->name('index');
 Route::get('/print', [PageController::class, 'print'])->name('print');
 Route::get('/export', [PageController::class, 'export'])->name('export');
 
+Route::get('/form', [PageController::class, 'form'])->name('form');
+Route::post('/form/save-draft', [PageController::class, 'saveDraft'])->name('save_draft');
+
+
+
+
+
 Route::resource('/subjects', SubjectController::class);
 //Route::get('/announcements', [AnnouncementController::class, 'index'])->name('announcements.index');
 //Route::get('/get-all-announcements-type', [AnnouncementController::class, 'getAllAnnouncementTypes'])->name(
