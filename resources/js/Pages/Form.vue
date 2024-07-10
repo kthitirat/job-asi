@@ -7,6 +7,15 @@
         <p class="text-lx text-center">ระหว่างวันที่ XXXXXXX 2568 ณ มหาวิทยาลัยราชภัฏพระนครศรีอยุธยา</p>
         <div class="bg-white w-full shadow-lg rounded-xl px-8 py-8 mt-4">
             <form>
+                <div class="flex w-full justify-end pr-4">
+                    <div v-if="!isSaved" class="text-gray-400">
+                        <span class="loading loading-spinner"></span>
+                    </div>    
+                    <p v-if="isSaved"
+                       class="text-base lg:text-lg text-green-500 uppercase font-bold opacity-50 italic">
+                        Saved
+                    </p>        
+                </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
                     <div>
                         <label class="form-control w-full">
@@ -545,7 +554,7 @@
                 </div>
 
                 <div class="col-span-2 w-full mt-2 flex gap-2 justify-end">
-                        <button :disabled="isSubmitting" class="btn btn-warning text-white" type="button" @click.prevent="saveDraft">บันทึกร่าง</button>
+                        <!-- <button :disabled="isSubmitting" class="btn btn-warning text-white" type="button" @click.prevent="saveDraft">บันทึกร่าง</button> -->
                         <button :disabled="isSubmitting" class="btn btn-success">ส่งข้อมูล</button>
                 </div>
 
@@ -577,7 +586,9 @@ export default {
     },
     data() {
         return {
-            isSubmitting:false,
+            isSubmitting: false,
+            dirtyForm: false,
+            debounce: null,                      
             form: useForm({
                 performance_id: this.performance.id ?? null,
                 institution: this.$page.props.user.institution,     
@@ -635,11 +646,31 @@ export default {
             const res = await axios.post(url, this.form);
             if (res.status === 200) {
                 this.isSubmitting = false;
-                //this.dirtyForm = false;
-                //this.performanceId = res.data.performance_id;
+                this.dirtyForm = false;               
                 return;
             }
         },    
+    },
+
+    watch: {
+        form: {
+            handler() {
+                this.dirtyForm = true;
+                clearTimeout(this.debounce)
+                this.debounce = setTimeout(() => {
+                    this.saveDraft();
+                }, 3000);
+            },
+            deep: true
+        }
+    },
+    computed: {
+        isSaved() {
+            if (this.dirtyForm) {
+                return false;
+            }
+            return true;
+        }
     },
  
 };
