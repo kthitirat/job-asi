@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
-        $this->call(PerformanceSeeder::class);
+        $this->call(PerformanceSeeder::class);    //ขึ้น Server จริงให้ปิด
         
         // $this->call(DepartmentSeeder::class);
         // $this->call(ProfessorSeeder::class);

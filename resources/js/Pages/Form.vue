@@ -80,7 +80,7 @@
                             <div class="label">
                                 <span class="label-text">ชื่อ-สกุล ผู้ประสานงานประจำสถาบัน</span>
                             </div>
-                            <input v-model="form.coordinator_name" class="input input-bordered w-full" placeholder="ชื่อ-สกุล ผู้ประสานงานประจำสถาบัน" type="text"/>
+                            <input v-model="form.coordinator_name" class="input input-bordered w-full" placeholder="ชื่อ-สกุล ผู้ประสานงานประจำสถาบัน" type="text" disabled/>
                         </label>
                         <div v-if="$page.props.errors.coordinator_name" class="text-red-500 text-sm">
                             {{ $page.props.errors.coordinator_name }}
@@ -546,7 +546,26 @@
                         </div>
                     </div>
                 </div>
-                <div class="md:grid-cols-2 gap-2 mt-6 note">
+
+                <input ref="imageInputRef" accept=".jpeg,.png,.jpg" class="hidden" type="file" @change="handleSelectImage">
+                
+                <div class="col-span-2 w-full grid grid-cols-5 gap-4 mt-4">
+                    <div v-for="(image,index) in displayImages" :key="index" class="w-full h-60 overflow-hidden">
+                        <img :src="image.url" class="object-cover w-full h-60">
+                    </div>
+                    <button 
+                        v-if="displayImages.length < 5"
+                        class="w-full h-20 md:h-36 lg:h-48 xl:h-60 border-2 border-dashed flex justify-center items-center text-gray-500" type="button"
+                            @click="$refs.imageInputRef.click()">
+                            <svg class="size-6" fill="none" stroke="currentColor" stroke-width="1.5"
+                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 4.5v15m7.5-7.5h-15" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                    </button>
+                </div>
+             
+
+                <div class="md:grid-cols-2 note">
                     <p><b>หมายเหตุ:</b></p>
                     <p>1. ระบบบันทึกอัตโนมัติ</p>
                     <p>2. หากยังกรอกข้อมูลไม่ครบถ้วน กรุณาอย่ากดส่งข้อมูล</p>
@@ -588,58 +607,97 @@ export default {
         return {
             isSubmitting: false,
             dirtyForm: false,
-            debounce: null,                      
+            debounce: null,  
+            displayImages: [],                    
             form: useForm({
-                performance_id: this.performance.id ?? null,
+                performance_id: null,
                 institution: this.$page.props.user.institution,     
                 email: this.$page.props.user.email,               
                 coordinator_name: this.$page.props.user.name,                                         
                 coordinator_phone: this.$page.props.user.tel,   
-                institution_head_name: this.performance.institution_head_name,
-                institution_head_position: this.performance.institution_head_position,   
-                coordinator_position: this.performance.coordinator_position,           
-                name: this.performance.name,
-                type: this.performance.type,
-                description: this.performance.description,
-                duration: this.performance.duration,
-                number_of_performers: this.performance.number_of_performers,
-                directors: this.performance.directors,            
-                performers: this.performance.performers,
-                musicians_or_narrators: this.performance.musicians_or_narrators,
-                number_of_musicians: this.performance.number_of_musicians,
-                opening_scene: this.performance.opening_scene,
-                stage_performance: this.performance.stage_performance,
-                ending_scene: this.performance.ending_scene,
-                costume_and_props: this.performance.costume_and_props,
-                stage_lighting: this.performance.stage_lighting,
-                sound_type: this.performance.sound_type,
-                number_of_microphones: this.performance.number_of_microphones,
-                number_of_amplifiers: this.performance.number_of_amplifiers,
-                other_specifications: this.performance.other_specifications,
-                sound_control: this.performance.sound_control,
-                institution_representatives: this.performance.institution_representatives,
-                faculty_and_staff: this.performance.faculty_and_staff,
-                students: this.performance.students,
-                vehicles: this.performance.vehicles,
-                arrival_date: this.performance.arrival_date,
-                arrival_time: this.performance.arrival_time,
-                departure_date: this.performance.departure_date,
-                departure_time: this.performance.departure_time,
-                accommodation: this.performance.accommodation,
-                ceremony_and_reception_details: this.performance.ceremony_and_reception_details,
-                number_of_institution_heads: this.performance.number_of_institution_heads,
-                number_of_faculty_and_staff: this.performance.number_of_faculty_and_staff,
-                number_of_students: this.performance.number_of_students               
+                institution_head_name: this.performance.institution_head_name ?? "",
+                institution_head_position: this.performance.institution_head_position ?? "",   
+                coordinator_position: this.performance.coordinator_position ?? "",           
+                name: this.performance.name ?? "",
+                type: this.performance.type ?? [],
+                description: this.performance.description ?? "",
+                duration: this.performance.duration ?? "",
+                number_of_performers: this.performance.number_of_performers ?? "",
+                directors: this.performance.directors ?? "",            
+                performers: this.performance.performers ?? "",
+                musicians_or_narrators: this.performance.musicians_or_narrators ?? "",
+                number_of_musicians: this.performance.number_of_musicians ?? "",
+                opening_scene: this.performance.opening_scene ?? "",
+                stage_performance: this.performance.stage_performance ?? "",
+                ending_scene: this.performance.ending_scene ?? "",
+                costume_and_props: this.performance.costume_and_props ?? "",
+                stage_lighting: this.performance.stage_lighting ?? "",
+                sound_type: this.performance.sound_type ?? "",
+                number_of_microphones: this.performance.number_of_microphones ?? "",
+                number_of_amplifiers: this.performance.number_of_amplifiers ?? "",
+                other_specifications: this.performance.other_specifications ?? "",
+                sound_control: this.performance.sound_control ?? "",
+                institution_representatives: this.performance.institution_representatives ?? "",
+                faculty_and_staff: this.performance.faculty_and_staff ?? "",
+                students: this.performance.students ?? "",
+                vehicles: this.performance.vehicles ?? "",
+                arrival_date: this.performance.arrival_date ?? "",
+                arrival_time: this.performance.arrival_time ?? "",
+                departure_date: this.performance.departure_date ?? "",
+                departure_time: this.performance.departure_time ?? "",
+                accommodation: this.performance.accommodation ?? "",
+                ceremony_and_reception_details: this.performance.ceremony_and_reception_details ?? "",
+                number_of_institution_heads: this.performance.number_of_institution_heads ?? "",
+                number_of_faculty_and_staff: this.performance.number_of_faculty_and_staff ?? "",
+                number_of_students: this.performance.number_of_students  ?? ""               
                 
             }),
       
         };
     },
     mounted() {
-
+        if (this.performance.length == 0) {
+            return;
+        }
+        this.form.performance_id = this.performance.id;
+        this.displayImages = this.performance?.images.data ?? [];
     },
 
     methods: {
+        async handleSelectImage(event) {
+            const image = event.target.files[0];
+            const maxSizeInMB = 10;
+            const maxSizeInBytes = maxSizeInMB * 1024 * 1024;
+
+            if (image.size > maxSizeInBytes) {
+                this.$swal.fire({
+                    icon: "error",
+                    title: "Too large image",
+                    text: "ขนาดไฟล์ใหญ่เกินไป กรุณาเลือก file ที่ขนาดไม่เกิน 10 MB",
+                });
+                return;
+            }
+
+             const formData = new FormData();
+             formData.append('image', image);
+             //formData.append('performance_id', this.form.performance_id)
+            
+             if (this.form.performance_id !=null) {
+                formData.append('performance_id', this.form.performance_id);
+             }
+
+            try {
+                const response = await axios.post(this.route('upload_image'), formData, {
+                    headers: {'Content-Type': 'multipart/form-data'}
+                });
+                this.displayImages = response.data.data;
+             
+                // console.log('Image Upload successful:', response.data);
+            } catch (error) {                
+                console.error('Error uploading image:', error);                
+            }
+ 
+        },
         async saveDraft() {
             this.isSubmitting = true;
             const url = this.route('save_draft');

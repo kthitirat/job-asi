@@ -14,13 +14,13 @@ class PerformanceSeeder extends Seeder
      */
     public function run(): void
     {
-        // $users = User::all();
-        // foreach ($users as $user) {
-        //     Performance::factory()->create([
-        //         'user_id' => $user->id,
-        //     ]);
-        // }
+        $users = User::all();
+        foreach ($users as $user) {
+            Performance::factory()->create([
+                'user_id' => $user->id,
+            ]);
+        }
 
-        Performance::factory()->count(10)->create();
+        //Performance::factory()->count(10)->create();
     }
 }

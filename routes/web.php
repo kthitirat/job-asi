@@ -28,6 +28,9 @@ Route::post('/form/save-draft', [PageController::class, 'saveDraft'])->name('sav
 Route::patch('/form/{performance}/submit', [PageController::class, 'submitForm'])->name('submit_form');
 
 
+Route::post('/form/upload-image', [PageController::class, 'uploadImage'])->name('upload_image');
+
+
 
 
 

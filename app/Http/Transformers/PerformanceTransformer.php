@@ -10,7 +10,7 @@ use League\Fractal\TransformerAbstract;
 
 class PerformanceTransformer extends TransformerAbstract
 {
-    //protected array $availableIncludes = ['image', 'documents'];
+    protected array $availableIncludes = ['images'];
 
     public function transform(Performance $performance): array
     {
@@ -65,11 +65,11 @@ class PerformanceTransformer extends TransformerAbstract
         return $data;
     }
 
-    // public function includeImage(Subject $subject)
-    // {
-    //     $images = $subject->getMedia(Subject::MEDIA_COLLECTION_IMAGE);
-    //     return $this->collection($images, new ImageTransformer());
-    // }
+    public function includeImages(Performance $performance)
+    {
+        $images = $performance->getMedia(Performance::MEDIA_COLLECTION_IMAGES);
+        return $this->collection($images, new ImageTransformer());
+    }
 
     // public function includeDocuments(Subject $subject)
     // {

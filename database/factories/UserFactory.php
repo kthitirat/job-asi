@@ -24,7 +24,7 @@ class UserFactory extends Factory
         return [
             'role_id' => Role::where('name', 'user')->first()->id,
             'name' => $this->faker->name(),
-            'institution' => $this->faker->company(),
+            'institution' => $this->faker->company,
             'email' => $this->faker->unique()->safeEmail(),
             'tel' => $this->faker->numerify('0#########'),
             'email_verified_at' => now(),

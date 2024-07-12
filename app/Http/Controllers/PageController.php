@@ -7,6 +7,7 @@ use App\Http\Transformers\SubjectTransformer;
 use App\Actions\Dashboard\SavePerformanceAction;
 use App\Http\Requests\Dashboard\SavePerformanceDraftRequest;
 use App\Http\Transformers\PerformanceTransformer;
+use App\Http\Transformers\ImageTransformer;
 use App\Models\Subject;
 use App\Models\Performance;
 use Illuminate\Http\Request;
@@ -16,8 +17,6 @@ use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exports\ArrayExporter;
 use Maatwebsite\Excel\Facades\Excel;
-
-
 
 class PageController extends Controller
 {
@@ -36,10 +35,34 @@ class PageController extends Controller
     public function form()
     {     
         $performance = Performance::where('user_id', Auth::id())->first();
-        $performanceData = fractal($performance, new PerformanceTransformer())->toArray();
+        $performanceData = fractal($performance, new PerformanceTransformer())->includeImages()->toArray();
         return Inertia::render('Form')->with([
             'performance' => $performanceData
         ]);
+    }
+
+    public function uploadImage(Request $request)
+    {
+       
+        $req = $request->validate([
+            'image' => ['required','image','mimes:jpeg,png,jpg','max:10240'], // 10240 KB = 10 MB
+            'performance_id' => ['nullable'],
+        ]);
+         
+        if (isset($req['performance_id']) && $req['performance_id']){                   //ถ้ามี performance ไม่เท่ากับ null 
+            $performance = Performance::findOrFail($req['performance_id']);
+        }
+        if (!isset($req['performance_id']) || is_null($req['performance_id'])) {      //ถ้าไม่มีให้สร้าง performance ใหม่
+                $performance = Performance::create([
+                'user_id' => Auth::id(),
+            ]);
+        }
+       
+        $media = $performance->addMedia($req['image'])->toMediaCollection(Performance::MEDIA_COLLECTION_IMAGES);
+        $images = $performance->getMedia(Performance::MEDIA_COLLECTION_IMAGES);
+        $imagesData = fractal($images, new ImageTransformer())->toArray();
+        return response()->json($imagesData);       
+
     }
 
     public function saveDraft(SavePerformanceDraftRequest $request, SavePerformanceAction $action)

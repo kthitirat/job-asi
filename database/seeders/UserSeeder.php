@@ -26,6 +26,12 @@ class UserSeeder extends Seeder
             'email' => 'cherry@aru.ac.th'
         ]);
 
+        // User::factory()->create([
+        //     'role_id' => Role::where('name', 'admin')->first()->id,
+        //     'name' => 'prikthai23',
+        //     'email' => 'prikthai23@hotmail.com'
+        // ]);
+
         User::factory()->create([
             'role_id' => Role::where('name', 'user')->first()->id,
             'name' => 'คุณทดสอบ',
@@ -45,6 +51,6 @@ class UserSeeder extends Seeder
 //            'email' => 'user@user.com'
 //        ]);
 
-        User::factory()->count(30)->create();
+        User::factory()->count(30)->create();    //ขึ้น Server จริงให้ปิด
     }
 }
