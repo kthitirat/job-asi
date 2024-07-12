@@ -29,6 +29,7 @@ Route::patch('/form/{performance}/submit', [PageController::class, 'submitForm']
 
 
 Route::post('/form/upload-image', [PageController::class, 'uploadImage'])->name('upload_image');
+Route::delete('/form/{performance}/delete-image', [PageController::class, 'deleteImage'])->name('delete_image');
 
 
 

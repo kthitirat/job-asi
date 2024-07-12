@@ -65,6 +65,25 @@ class PageController extends Controller
 
     }
 
+    public function deleteImage(Performance $performance, Request $request)
+    {
+        $req = $request->validate([
+            'image_id' => ['required', 'exists:media,id'],
+        ]);
+        $media = $performance->getMedia(Performance::MEDIA_COLLECTION_IMAGES)->where('id', $req['image_id'])->first();
+        if (!$media) {
+            return;
+        }
+        $media->delete();
+
+        $updatedPerformance = $performance->fresh();
+        $images = $updatedPerformance->getMedia(Performance::MEDIA_COLLECTION_IMAGES);
+        $imagesData = fractal($images, new ImageTransformer())->toArray();
+        return response()->json($imagesData);
+
+        
+    }
+
     public function saveDraft(SavePerformanceDraftRequest $request, SavePerformanceAction $action)
     {
         $performance = Performance::find($request->performance_id);

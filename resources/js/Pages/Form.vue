@@ -548,24 +548,26 @@
                 </div>
 
                 <input ref="imageInputRef" accept=".jpeg,.png,.jpg" class="hidden" type="file" @change="handleSelectImage">
-                
-                <div class="col-span-2 w-full grid grid-cols-5 gap-4 mt-4">
-                    <div v-for="(image,index) in displayImages" :key="index" class="w-full h-60 overflow-hidden">
-                        <img :src="image.url" class="object-cover w-full h-60">
+                <div class="col-span-2 w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-8">
+                    <div v-for="(image, index) in displayImages" :key="index" class="relative w-full h-60 overflow-hidden">
+                        <img :src="image.url" class="object-cover w-full h-full">
+                        <button @click.prevent="handleDeleteImage(image)" type="button" class="absolute top-1 right-1 text-red-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                        </button>
                     </div>
-                    <button 
-                        v-if="displayImages.length < 5"
-                        class="w-full h-20 md:h-36 lg:h-48 xl:h-60 border-2 border-dashed flex justify-center items-center text-gray-500" type="button"
+                        <button 
+                            v-if="displayImages.length < maxImage"
+                            class="w-full h-20 md:h-36 lg:h-48 xl:h-60 border-2 border-dashed flex justify-center items-center text-gray-500" type="button"
                             @click="$refs.imageInputRef.click()">
-                            <svg class="size-6" fill="none" stroke="currentColor" stroke-width="1.5"
-                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12 4.5v15m7.5-7.5h-15" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                    </button>
+                        </button>
                 </div>
-             
 
-                <div class="md:grid-cols-2 note">
+                <div class="md:grid-cols-2 note mt-4">
                     <p><b>หมายเหตุ:</b></p>
                     <p>1. ระบบบันทึกอัตโนมัติ</p>
                     <p>2. หากยังกรอกข้อมูลไม่ครบถ้วน กรุณาอย่ากดส่งข้อมูล</p>
@@ -608,7 +610,8 @@ export default {
             isSubmitting: false,
             dirtyForm: false,
             debounce: null,  
-            displayImages: [],                    
+            displayImages: [],   
+            maxImage: 5,                 
             form: useForm({
                 performance_id: null,
                 institution: this.$page.props.user.institution,     
@@ -664,6 +667,22 @@ export default {
     },
 
     methods: {
+        async handleDeleteImage(image){
+            try{
+                const response = await axios.delete(this.route('delete_image', this.form.performance_id), {
+                params:{
+                    image_id: image.id
+                }
+                });
+                this.displayImages = response.data.data;
+
+            } catch (error) {
+                console.log('---------');
+                console.log(error);
+                console.log('---------');
+            }
+
+        },
         async handleSelectImage(event) {
             const image = event.target.files[0];
             const maxSizeInMB = 10;
@@ -761,8 +780,12 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
+    .relative {
+    position: relative;
+    }
     .note {
     line-height: 1.8; /* กำหนดระยะห่างของบรรทัด */
     }
 </style>
+
