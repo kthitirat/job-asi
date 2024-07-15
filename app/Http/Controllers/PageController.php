@@ -42,15 +42,21 @@ class PageController extends Controller
     }
 
     public function uploadImage(Request $request)
-    {
-       
+    {       
         $req = $request->validate([
             'image' => ['required','image','mimes:jpeg,png,jpg','max:10240'], // 10240 KB = 10 MB
             'performance_id' => ['nullable'],
         ]);
-        $performance = Performance::where('user_id',Auth::id())->first();
-        if (!$performance) {      //ถ้าไม่มีให้สร้าง performance ใหม่
-                $performance = Performance::create([
+        $performance = null;
+        if (Auth::user()->role->name === 'admin') {
+            $performance = Performance::findOrFail($request->get('performance_id'));
+        }
+        if (Auth::user()->role->name === 'user') {
+            $performance = Performance::where('user_id', Auth::id())->first();
+        }         
+       // $performance = Performance::where('user_id',Auth::id())->first();
+        if (!$performance) {
+            $performance = Performance::create([
                 'user_id' => Auth::id(),
             ]);
         }
@@ -79,14 +85,22 @@ class PageController extends Controller
     }
 
     public function saveDraft(SavePerformanceDraftRequest $request, SavePerformanceAction $action)
-    {        
-        $performance = Performance::where('user_id',Auth::id())->first();
+    {   
+
+        $performance = null;
+        if (Auth::user()->role->name === 'admin') {
+            $performance = Performance::findOrFail($request->get('performance_id'));
+        }
+        if (Auth::user()->role->name === 'user') {
+            $performance = Performance::where('user_id', Auth::id())->first();
+        }         
+       // $performance = Performance::where('user_id',Auth::id())->first();
         if (!$performance) {
             $performance = Performance::create([
                 'user_id' => Auth::id(),
             ]);
         }
-     
+      
         $action->execute($performance, $request->validated());       
         return response()->json(null, 200);
     }

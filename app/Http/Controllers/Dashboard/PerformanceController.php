@@ -18,5 +18,24 @@ class PerformanceController extends Controller
             'performances' => $performanceData
         ]);
       
-    }   
+    }  
+    
+    public function edit(Performance $performance)
+    {
+        // $performance = Performance::where('user_id', Auth::id())->first();
+        
+        $performanceData = fractal($performance, new PerformanceTransformer())->includeImages()->toArray();  
+        return Inertia::render('Form')->with([
+            'performance' => $performanceData
+        ]);
+    }
+
+    public function togglePubish(Performance $performance)
+    {
+        $performance->is_published = !$performance->is_published;
+        $performance->save();
+        return response()->json(null, 200);
+    }
+
+
 }

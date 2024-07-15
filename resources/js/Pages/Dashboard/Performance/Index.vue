@@ -20,17 +20,18 @@
                     class="bg-white border-b">
                     <th class="text-center">{{ performance.id }}</th>
                     <td class="px-6 py-4">
-                        <!-- <a :href="route('dashboard.performances.edit',performance.id)" class="underline"
-                           target="_blank"> -->
+                        <a :href="route('dashboard.performances.edit',performance.id)" class="underline"
+                           target="_blank"> 
                             {{ performance.owner.institution }}
-                        <!-- </a> -->
+                        </a> 
                     </td>
                     <td>{{ performance.owner.name }}</td>
                     <td>{{ performance.owner.email }}</td>
                     <td>{{ performance.owner.tel }}</td>
                     <td>
                         <div class="flex w-full items-center justify-center">
-                            <input :checked="performance.is_published" type="checkbox" class="toggle toggle-success"  />
+                            <input :checked="performance.is_published" class="toggle toggle-success"
+                                    type="checkbox" @change="handlePublish(performance)"  />
                         </div>
                     </td>
                 </tr>
@@ -55,6 +56,7 @@ import Layout from "@/Pages/Dashboard/Layout/Layout.vue";
 import {Link} from "@inertiajs/vue3";
 import {Inertia} from "@inertiajs/inertia";
 import {nextTick} from "vue";
+import axios from "axios";
 
 export default {
     name: "PerformancesIndex",
@@ -79,6 +81,17 @@ export default {
         this.pagination = this.performances.meta.pagination;
     },
     methods: {
+        async handlePublish(performance) {
+            try {
+                const response = await axios.post(this.route('dashboard.performances.toggle_publish',performance.id));
+            } catch (e) {
+                console.log('------------');
+                console.log(e);
+                console.log('------------');
+            }
+  
+        },
+
         handleDeleteperformance(performance) {
             this.$swal.fire({
                 title: "คุณต้องการที่จะลบวิชา " + performance.name_th + '?',
