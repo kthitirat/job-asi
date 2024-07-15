@@ -8,10 +8,17 @@
                 <h2 class="card-title">งานศิลปวัฒนธรรมอุดมศึกษาครั้งที่ 23</h2>
                 <p>{{ $page.props.user.institution }}</p>
                 <div class="card-actions justify-end">
-                    <Link v-if="performance && !performance.is_published" :href="route('form')" class="btn btn-primary">แก้ไขข้อมูล
+                    <Link v-if="performance && !performance.is_published" :href="route('form')" 
+                        class="btn btn-primary">แก้ไขข้อมูล
                     </Link>
-                    <div v-if="performance && performance.is_published" class="px-4 py-2 bg-green-700 rounded-md text-white opacity-50">ส่งข้อมูลเรียบร้อยแล้ว
+                    <div v-if="performance && performance.is_published" 
+                        class="px-4 py-2 bg-green-700 rounded-md text-white opacity-50">ส่งข้อมูลเรียบร้อยแล้ว
                     </div>
+                    <Link v-if="performance && performance.is_published" 
+                            :href="route('performance_view', performance.id)"
+                            class="px-4 py-2 bg-primary rounded-md text-white cursor-pointer">
+                        ดูสรุป
+                    </Link>
                 </div>
                 
             </div>

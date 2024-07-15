@@ -32,6 +32,8 @@ Route::post('/form/upload-image', [PageController::class, 'uploadImage'])->name(
 Route::delete('/form/{performance}/delete-image', [PageController::class, 'deleteImage'])->name('delete_image');
 
 
+Route::get('/performances/{performance}/view', [PageController::class, 'performanceView'])->name('performance_view');
+
 
 
 
