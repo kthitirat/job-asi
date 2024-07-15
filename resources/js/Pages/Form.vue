@@ -611,9 +611,9 @@ export default {
             dirtyForm: false,
             debounce: null,  
             displayImages: [],   
-            maxImage: 5,                 
+            maxImage: 5,             
             form: useForm({
-                performance_id: null,
+                performance_id: this.performance.id,
                 institution: this.$page.props.user.institution,     
                 email: this.$page.props.user.email,               
                 coordinator_name: this.$page.props.user.name,                                         
@@ -662,7 +662,7 @@ export default {
         if (this.performance.length == 0) {
             return;
         }
-        this.form.performance_id = this.performance.id;
+        // this.form.performance_id = this.performance.id;
         this.displayImages = this.performance?.images.data ?? [];
     },
 
@@ -718,12 +718,15 @@ export default {
  
         },
         async saveDraft() {
-            this.isSubmitting = true;
+            this.isSubmitting = true;          
             const url = this.route('save_draft');
             const res = await axios.post(url, this.form);
             if (res.status === 200) {
                 this.isSubmitting = false;
-                this.dirtyForm = false;               
+                this.dirtyForm = false;                  
+                if (this.performanceId == null) {
+                    router.reload();
+                }   
                 return;
             }
         },

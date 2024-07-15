@@ -48,16 +48,12 @@ class PageController extends Controller
             'image' => ['required','image','mimes:jpeg,png,jpg','max:10240'], // 10240 KB = 10 MB
             'performance_id' => ['nullable'],
         ]);
-         
-        if (isset($req['performance_id']) && $req['performance_id']){                   //ถ้ามี performance ไม่เท่ากับ null 
-            $performance = Performance::findOrFail($req['performance_id']);
-        }
-        if (!isset($req['performance_id']) || is_null($req['performance_id'])) {      //ถ้าไม่มีให้สร้าง performance ใหม่
+        $performance = Performance::where('user_id',Auth::id())->first();
+        if (!$performance) {      //ถ้าไม่มีให้สร้าง performance ใหม่
                 $performance = Performance::create([
                 'user_id' => Auth::id(),
             ]);
         }
-       
         $media = $performance->addMedia($req['image'])->toMediaCollection(Performance::MEDIA_COLLECTION_IMAGES);
         $images = $performance->getMedia(Performance::MEDIA_COLLECTION_IMAGES);
         $imagesData = fractal($images, new ImageTransformer())->toArray();
@@ -79,20 +75,19 @@ class PageController extends Controller
         $updatedPerformance = $performance->fresh();
         $images = $updatedPerformance->getMedia(Performance::MEDIA_COLLECTION_IMAGES);
         $imagesData = fractal($images, new ImageTransformer())->toArray();
-        return response()->json($imagesData);
-
-        
+        return response()->json($imagesData);        
     }
 
     public function saveDraft(SavePerformanceDraftRequest $request, SavePerformanceAction $action)
-    {
-        $performance = Performance::find($request->performance_id);
-        if(!$performance){
+    {        
+        $performance = Performance::where('user_id',Auth::id())->first();
+        if (!$performance) {
             $performance = Performance::create([
-                'user_id' => Auth::id()
+                'user_id' => Auth::id(),
             ]);
         }
-        $performance = $action->execute($performance, $request->validated());
+     
+        $action->execute($performance, $request->validated());       
         return response()->json(null, 200);
     }
 
