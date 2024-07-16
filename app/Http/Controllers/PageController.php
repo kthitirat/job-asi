@@ -17,6 +17,8 @@ use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exports\ArrayExporter;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SubmitFormEmail;
 
 class PageController extends Controller
 {
@@ -109,9 +111,14 @@ class PageController extends Controller
     {
         $performance->is_published = true;
         $performance->save();
-        return response()->json(null, 200);     
-    }
 
+        $updatedPerformance = $performance->fresh();
+        $updatedPerformanceData = fractal($updatedPerformance, new PerformanceTransformer())->toArray();
+        Mail::to('recipient@example.com')->send(new SubmitFormEmail($updatedPerformanceData));
+
+        return response()->json(null, 200);
+    }
+ 
     public function performanceView(Performance $performance)
     {
         $performanceData = fractal($performance, new PerformanceTransformer())->includeImages()->toArray();
