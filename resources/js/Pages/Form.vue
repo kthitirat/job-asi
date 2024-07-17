@@ -8,8 +8,24 @@
         <div class="bg-white w-full shadow-lg rounded-xl px-8 py-8 mt-4">
             <form>
                 <div class="flex w-full justify-end pr-4 gap-2 items-center">
-                    <a :href="route('performance_view', this.performance.id)" class="text-green-600" target="_blank">
-                        <svg class="size-8" fill="none" stroke="currentColor" stroke-width="1.5"
+                    <div>
+                        <svg id="Capa_1" fill="#000000" height="30px" version="1.1" viewBox="0 0 48 48"
+                             width="30px" xml:space="preserve"
+                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier"> <g> <g> <path
+                                d="M47.987,21.938c-0.006-0.091-0.023-0.178-0.053-0.264c-0.011-0.032-0.019-0.063-0.033-0.094 c-0.048-0.104-0.109-0.202-0.193-0.285c-0.001-0.001-0.001-0.001-0.001-0.001L42,15.586V10c0-0.022-0.011-0.041-0.013-0.063 c-0.006-0.088-0.023-0.173-0.051-0.257c-0.011-0.032-0.019-0.063-0.034-0.094c-0.049-0.106-0.11-0.207-0.196-0.293l-9-9 c-0.086-0.086-0.187-0.148-0.294-0.197c-0.03-0.013-0.06-0.022-0.09-0.032c-0.086-0.03-0.174-0.047-0.264-0.053 C32.038,0.01,32.02,0,32,0H7C6.448,0,6,0.448,6,1v14.586l-5.707,5.707c0,0-0.001,0.001-0.002,0.002 c-0.084,0.084-0.144,0.182-0.192,0.285c-0.014,0.031-0.022,0.062-0.033,0.094c-0.03,0.086-0.048,0.173-0.053,0.264 C0.011,21.96,0,21.978,0,22v19c0,0.552,0.448,1,1,1h5v5c0,0.552,0.448,1,1,1h34c0.552,0,1-0.448,1-1v-5h5c0.552,0,1-0.448,1-1V22 C48,21.978,47.989,21.96,47.987,21.938z M44.586,21H42v-2.586L44.586,21z M38.586,9H33V3.414L38.586,9z M8,2h23v8 c0,0.552,0.448,1,1,1h8v5v5H8v-5V2z M6,18.414V21H3.414L6,18.414z M40,46H8v-4h32V46z M46,40H2V23h5h34h5V40z"></path>
+                                <path
+                                    d="M18.254,26.72c-0.323-0.277-0.688-0.473-1.097-0.586c-0.408-0.113-0.805-0.17-1.19-0.17h-3.332V38h2.006v-4.828h1.428 c0.419,0,0.827-0.074,1.224-0.221c0.397-0.147,0.748-0.374,1.054-0.68c0.306-0.306,0.552-0.688,0.74-1.148 c0.187-0.459,0.281-0.994,0.281-1.606c0-0.68-0.105-1.247-0.315-1.7C18.843,27.364,18.577,26.998,18.254,26.72z M16.971,31.005 c-0.306,0.334-0.697,0.501-1.173,0.501h-1.156v-3.825h1.156c0.476,0,0.867,0.147,1.173,0.442c0.306,0.295,0.459,0.765,0.459,1.411 C17.43,30.18,17.277,30.67,16.971,31.005z"></path>
+                                <polygon
+                                    points="30.723,38 32.78,38 32.78,32.832 35.857,32.832 35.857,31.081 32.764,31.081 32.764,27.8 36.112,27.8 36.112,25.964 30.723,25.964 "></polygon>
+                                <path
+                                    d="M24.076,25.964H21.05V38h3.009c1.553,0,2.729-0.524,3.528-1.572c0.799-1.049,1.198-2.525,1.198-4.429 c0-1.904-0.399-3.386-1.198-4.446C26.788,26.494,25.618,25.964,24.076,25.964z M26.55,33.843c-0.13,0.528-0.315,0.967-0.552,1.318 c-0.238,0.351-0.521,0.615-0.85,0.79c-0.329,0.176-0.686,0.264-1.071,0.264h-0.969v-8.466h0.969c0.385,0,0.742,0.088,1.071,0.264 c0.329,0.175,0.612,0.439,0.85,0.79c0.238,0.351,0.422,0.793,0.552,1.326s0.196,1.156,0.196,1.87 C26.746,32.702,26.68,33.316,26.55,33.843z"></path> </g> </g> </g></svg>
+                    </div>
+                    <div v-if="performance.length != 0">
+                        <a :href="route('performance_view',this.performance.id)"
+                           class="text-green-600" target="_blank">
+                            <svg class="size-8" fill="none" stroke="currentColor" stroke-width="1.5"
                                  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
@@ -17,8 +33,10 @@
                                     stroke-linejoin="round"/>
                                 <path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" stroke-linecap="round"
                                       stroke-linejoin="round"/>
-                        </svg>   
-                    </a>
+                            </svg>
+                        </a>
+                    </div>
+                 
                     <div v-if="!isSaved" class="text-gray-400">
                         <span class="loading loading-spinner"></span>
                     </div>    
@@ -562,19 +580,28 @@
                 <div class="col-span-2 w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-8">
                     <div v-for="(image, index) in displayImages" :key="index" class="relative w-full h-60 overflow-hidden">
                         <img :src="image.url" class="object-cover w-full h-full">
-                        <button @click.prevent="handleDeleteImage(image)" type="button" class="absolute top-1 right-1 text-red-500">
+                        <button v-if="!isSubmitting" @click.prevent="handleDeleteImage(image)" type="button" class="absolute top-1 right-1 text-red-500">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                             </svg>
                         </button>
+                        <div v-if="isSubmitting" 
+                            class="absolute top-0 left-0 w-full h-60 bg-white opacity-50 flex items-center justify-center">
+                            <span class="loading loading-spinner loading-lg"></span>
+                        </div>
                     </div>
                         <button 
                             v-if="displayImages.length < maxImage"
                             class="w-full h-20 md:h-36 lg:h-48 xl:h-60 border-2 border-dashed flex justify-center items-center text-gray-500" type="button"
-                            @click="$refs.imageInputRef.click()">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            @click="selectingImage">
+                            <div v-if="!isSubmitting">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12 4.5v15m7.5-7.5h-15" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                                </svg>
+                            </div>  
+                            <div v-if="isSubmitting">
+                                <span class="loading loading-spinner loading-lg"></span>
+                            </div>                        
                         </button>
                 </div>
 
@@ -589,9 +616,22 @@
                         <!-- <button :disabled="isSubmitting" class="btn btn-warning text-white" type="button" @click.prevent="saveDraft">บันทึกร่าง</button> -->
                         <button :disabled="isSubmitting" class="btn btn-success"
                                 @click.prevent="submit">                                   
-                        ส่งข้อมูล</button>
+                                ส่งข้อมูล
+                        </button>
                 </div>
-
+                <button ref="showSendingEmailModal" class="btn hidden" onclick="sending_email.showModal()" type="button">open modal</button>
+                    <dialog id="sending_email" class="modal">
+                        <div class="modal-box">
+                            <form method="dialog">
+                                <button ref="sendingEmailCloseModal" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 hidden">✕</button>
+                            </form>
+                            <h3 class="text-lg font-bold text-center text-gray-500">กำลังส่งข้อมูล</h3>
+                            <div class="flex flex-col items-center justify-center gap-2">
+                                <span class="loading loading-spinner text-success mt-2"></span>
+                                <p class="py-4 text-center text-gray-500">กำลังส่งข้อมูลให้กับแอดมิน กรุณารอสักครู่ และอย่าออกจากหน้านี้</p>
+                            </div>   
+                        </div>
+                    </dialog>
             </form>
         </div>
     </Layout>
@@ -619,6 +659,7 @@ export default {
     data() {
         return {
             isSubmitting: false,
+            isSending: false,
             dirtyForm: false,
             debounce: null,  
             displayImages: [],   
@@ -670,27 +711,33 @@ export default {
         };
     },
     mounted() {
-        if (this.performance.length == 0) {
+        if (this.performance.length === 0) {
             return;
         }
-        // this.form.performance_id = this.performance.id;
-        this.displayImages = this.performance?.images.data ?? [];
+        this.displayImages = this.performance.images.data ?? [];
+        this.performanceId = this.performance.id;
     },
 
     methods: {
+        selectingImage() {
+            if (this.isSubmitting) return;
+            this.$refs.imageInputRef.click()
+        },
         async handleDeleteImage(image){
+            this.isSubmitting = true;
             try{
-                const response = await axios.delete(this.route('delete_image', this.form.performance_id), {
-                params:{
-                    image_id: image.id
-                }
+                const response = await axios.delete(this.route('delete_image', this.performanceId), {
+                    params: {
+                        image_id: image.id
+                    }
                 });
                 this.displayImages = response.data.data;
-
+                this.isSubmitting = false;
             } catch (error) {
-                console.log('---------');
+                this.isSubmitting = false;
+                console.log('-----------------');
                 console.log(error);
-                console.log('---------');
+                console.log('-----------------');
             }
 
         },
@@ -698,7 +745,6 @@ export default {
             const image = event.target.files[0];
             const maxSizeInMB = 10;
             const maxSizeInBytes = maxSizeInMB * 1024 * 1024;
-
             if (image.size > maxSizeInBytes) {
                 this.$swal.fire({
                     icon: "error",
@@ -707,37 +753,33 @@ export default {
                 });
                 return;
             }
-
-             const formData = new FormData();
-             formData.append('image', image);
-             //formData.append('performance_id', this.form.performance_id)
-            
-             if (this.form.performance_id !=null) {
-                formData.append('performance_id', this.form.performance_id);
-             }
+            const formData = new FormData();
+            formData.append('image', image);
+            if (this.performanceId != null) {
+                formData.append('performance_id', this.performanceId);
+            }
 
             try {
+                this.isSubmitting = true;
                 const response = await axios.post(this.route('upload_image'), formData, {
                     headers: {'Content-Type': 'multipart/form-data'}
                 });
-                this.displayImages = response.data.data;
-             
-                // console.log('Image Upload successful:', response.data);
-            } catch (error) {                
-                console.error('Error uploading image:', error);                
+                this.displayImages = response.data.images.data;
+                this.performanceId = response.data.performance_id
+                this.isSubmitting = false;
+            } catch (error) {
+                this.isSubmitting = false;
+                console.error('Error uploading image:', error);
             }
- 
         },
         async saveDraft() {
-            this.isSubmitting = true;          
+            this.isSubmitting = true;
             const url = this.route('save_draft');
             const res = await axios.post(url, this.form);
             if (res.status === 200) {
                 this.isSubmitting = false;
-                this.dirtyForm = false;                  
-                if (this.performanceId == null) {
-                    router.reload();
-                }   
+                this.dirtyForm = false;
+                this.performanceId = res.data.performance_id;
                 return;
             }
         },
@@ -752,24 +794,36 @@ export default {
             if (!result.isConfirmed) {
                 return;
             }
-
-            const url = this.route('submit_form', this.performance.id);
+            this.isSending = true;
+            const url = this.route('submit_form', this.performanceId);
             const res = await axios.patch(url, {});
             if (res.status === 200) {
-                this.$swal({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'ท่านได้ส่งข้อมูลการลงทะเบียนเรียบร้อยแล้ว',
-                    showConfirmButton: false,
-                    timer: 1500
-                }).then(()=> {
-                    window.location.href = this.route('index');
-                })
+                this.isSending = false;
+                setTimeout(() => {
+                    this.$swal({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'ท่านได้ยื่นรายละเอียดการแสดงเรียบร้อยแล้ว',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(() => {
+                        window.location.href = this.route('index');
+                    })
+                }, 500);
+            } else {
+                this.isSending = false;
             }
-        }    
+        }
     },
-
     watch: {
+        isSending() {
+            if (!this.isSending) {
+                this.$refs.sendingEmailCloseModal.click();
+                return;
+            }
+            this.$refs.showSendingEmailModal.click();
+            return;
+        },
         form: {
             handler() {
                 this.dirtyForm = true;
@@ -788,8 +842,7 @@ export default {
             }
             return true;
         }
-    },
- 
+    }
 };
 
 </script>

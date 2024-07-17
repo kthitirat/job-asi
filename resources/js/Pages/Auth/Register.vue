@@ -10,6 +10,8 @@ import TextInput from '@/Components/TextInput.vue';
 
 const form = useForm({
     name: '',
+    institution: '',
+    tel: '',
     email: '',
     password: '',
     password_confirmation: '',
@@ -32,20 +34,38 @@ const submit = () => {
         </template>
 
         <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="name" value="Name"/>
+            <div class="mt-4">
+                <InputLabel for="name" value="Firstname"/>
                 <input id="name" v-model="form.name" autocomplete="name"
                        autofocus class="input input-bordered w-full"
-                       placeholder="ผู้ประสานงานประจำสถาบัน"
+                       placeholder="ชื่อ-สกุล ผู้ประสานงานประจำสถาบัน"
                        required type="text"/>
                 <InputError :message="form.errors.name" class="mt-2"/>
+            </div>
+
+            <div class="mt-4">
+                <InputLabel for="institution" value="Institution"/>
+                <input id="institution" v-model="form.institution" autocomplete="institution"
+                       class="input input-bordered w-full"
+                       placeholder="ชื่อสถาบันการศึกษา"
+                       required type="institution"/>
+                <InputError :message="form.errors.institution" class="mt-2"/>
+            </div>
+
+            <div class="mt-4">
+                <InputLabel for="tel" value="Phone"/>
+                <input id="tel" v-model="form.tel" autocomplete="tel"
+                       class="input input-bordered w-full"
+                       placeholder="หมายเลขโทรศัพท์ ผู้ประสานงานประจำสถาบัน"
+                       required type="tel"/>
+                <InputError :message="form.errors.tel" class="mt-2"/>
             </div>
 
             <div class="mt-4">
                 <InputLabel for="email" value="Email"/>
                 <input id="email" v-model="form.email" autocomplete="email"
                        class="input input-bordered w-full"
-                       placeholder="Type here"
+                       placeholder="Email"
                        required type="email"/>
                 <InputError :message="form.errors.email" class="mt-2"/>
             </div>
@@ -54,7 +74,7 @@ const submit = () => {
                 <InputLabel for="password" value="Password"/>
                 <input id="password" v-model="form.password"
                        class="input input-bordered w-full"
-                       placeholder="Type here"
+                       placeholder="กรอกรหัสผ่าน"
                        required type="password"/>
                 <InputError :message="form.errors.password" class="mt-2"/>
             </div>
@@ -63,7 +83,7 @@ const submit = () => {
                 <InputLabel for="password_confirmation" value="Confirm Password"/>
                 <input id="password_confirmation" v-model="form.password_confirmation"
                        class="input input-bordered w-full"
-                       placeholder="Type here"
+                       placeholder="ยืนยันรหัสผ่าน"
                        required type="password"/>
                 <InputError :message="form.errors.password_confirmation" class="mt-2"/>
             </div>

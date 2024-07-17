@@ -18,6 +18,8 @@ class RegisterUserAction
         $userRole = Role::where('name','user')->first();
         $this->user = $user;
         $this->user->name = $data['name'];
+        $this->user->institution = $data['institution'];
+        $this->user->tel = $data['tel'];
         $this->user->email = $data['email'];
         $this->user->password = bcrypt($data['password']);
         $this->user->role_id = $userRole->id;

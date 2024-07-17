@@ -44,9 +44,9 @@ class PageController extends Controller
     }
 
     public function uploadImage(Request $request)
-    {       
+    {
         $req = $request->validate([
-            'image' => ['required','image','mimes:jpeg,png,jpg','max:10240'], // 10240 KB = 10 MB
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg', 'max:10240'],
             'performance_id' => ['nullable'],
         ]);
         $performance = null;
@@ -55,8 +55,7 @@ class PageController extends Controller
         }
         if (Auth::user()->role->name === 'user') {
             $performance = Performance::where('user_id', Auth::id())->first();
-        }         
-       // $performance = Performance::where('user_id',Auth::id())->first();
+        }
         if (!$performance) {
             $performance = Performance::create([
                 'user_id' => Auth::id(),
@@ -65,10 +64,14 @@ class PageController extends Controller
         $media = $performance->addMedia($req['image'])->toMediaCollection(Performance::MEDIA_COLLECTION_IMAGES);
         $images = $performance->getMedia(Performance::MEDIA_COLLECTION_IMAGES);
         $imagesData = fractal($images, new ImageTransformer())->toArray();
-        return response()->json($imagesData);       
+        $data['images'] = $imagesData;
+        $data['performance_id'] = $performance->id;
 
+        return response()->json($data);
     }
 
+
+ 
     public function deleteImage(Performance $performance, Request $request)
     {
         $req = $request->validate([
@@ -79,47 +82,44 @@ class PageController extends Controller
             return;
         }
         $media->delete();
-
         $updatedPerformance = $performance->fresh();
         $images = $updatedPerformance->getMedia(Performance::MEDIA_COLLECTION_IMAGES);
         $imagesData = fractal($images, new ImageTransformer())->toArray();
-        return response()->json($imagesData);        
+        return response()->json($imagesData);
     }
 
     public function saveDraft(SavePerformanceDraftRequest $request, SavePerformanceAction $action)
-    {   
-
+    {
         $performance = null;
         if (Auth::user()->role->name === 'admin') {
             $performance = Performance::findOrFail($request->get('performance_id'));
         }
         if (Auth::user()->role->name === 'user') {
             $performance = Performance::where('user_id', Auth::id())->first();
-        }         
-       // $performance = Performance::where('user_id',Auth::id())->first();
+        }
         if (!$performance) {
             $performance = Performance::create([
                 'user_id' => Auth::id(),
             ]);
         }
-      
-        $action->execute($performance, $request->validated());       
-        return response()->json(null, 200);
+        $updatedPerformance = $action->execute($performance, $request->validated());
+        $data['performance_id'] = $updatedPerformance->id;
+        return response()->json($data, 200);
     }
 
-    public function submitForm(Performance $performance)
+    public function submitForm(performance $performance)
     {
         $performance->is_published = true;
         $performance->save();
 
         $updatedPerformance = $performance->fresh();
         $updatedPerformanceData = fractal($updatedPerformance, new PerformanceTransformer())->toArray();
-        Mail::to('recipient@example.com')->send(new SubmitFormEmail($updatedPerformanceData));
+        Mail::to('info@aru.ac.th')->send(new SubmitFormEmail($updatedPerformanceData));
 
         return response()->json(null, 200);
     }
  
-    public function performanceView(Performance $performance)
+    public function performanceView(performance $performance)
     {
         $performanceData = fractal($performance, new PerformanceTransformer())->includeImages()->toArray();
         return Inertia::render('ShowPerformance')->with([
@@ -147,10 +147,12 @@ class PageController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string'],
+            'institution' => ['required', 'string'],
+            'tel' => ['required', 'string'],
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'string', 'confirmed'],
             'terms' => ['required', 'accepted'],
-        ]);
+        ]);        
         $newUser = $userAction->execute(new User(), $request->all());
         Auth::login($newUser);
         return redirect()->route('index');
