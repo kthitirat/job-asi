@@ -115,7 +115,7 @@ class PageController extends Controller
         $updatedPerformance = $performance->fresh();
         $updatedPerformanceData = fractal($updatedPerformance, new PerformanceTransformer())->toArray();
         Mail::to('info@aru.ac.th')->send(new SubmitFormEmail($updatedPerformanceData));
-
+        // Mail::to('info@aru.ac.th')->send(new SubmitFormEmail($updatedPerformanceData));   เพิ่ม email admin เพื่อรับทราบการส่งการลงทะเบียน        
         return response()->json(null, 200);
     }
  
