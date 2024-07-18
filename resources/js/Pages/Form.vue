@@ -8,7 +8,7 @@
         <div class="bg-white w-full shadow-lg rounded-xl px-8 py-8 mt-4">
             <form>
                 <div class="flex w-full justify-end pr-4 gap-2 items-center">
-                    <div>
+                    <a class="currsor-pointer" :href="route('performance_pdf_view',performance.id)" target="_blank">
                         <svg id="Capa_1" fill="#000000" height="30px" version="1.1" viewBox="0 0 48 48"
                              width="30px" xml:space="preserve"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -21,7 +21,7 @@
                                     points="30.723,38 32.78,38 32.78,32.832 35.857,32.832 35.857,31.081 32.764,31.081 32.764,27.8 36.112,27.8 36.112,25.964 30.723,25.964 "></polygon>
                                 <path
                                     d="M24.076,25.964H21.05V38h3.009c1.553,0,2.729-0.524,3.528-1.572c0.799-1.049,1.198-2.525,1.198-4.429 c0-1.904-0.399-3.386-1.198-4.446C26.788,26.494,25.618,25.964,24.076,25.964z M26.55,33.843c-0.13,0.528-0.315,0.967-0.552,1.318 c-0.238,0.351-0.521,0.615-0.85,0.79c-0.329,0.176-0.686,0.264-1.071,0.264h-0.969v-8.466h0.969c0.385,0,0.742,0.088,1.071,0.264 c0.329,0.175,0.612,0.439,0.85,0.79c0.238,0.351,0.422,0.793,0.552,1.326s0.196,1.156,0.196,1.87 C26.746,32.702,26.68,33.316,26.55,33.843z"></path> </g> </g> </g></svg>
-                    </div>
+                    </a>
                     <div v-if="performance.length != 0">
                         <a :href="route('performance_view',this.performance.id)"
                            class="text-green-600" target="_blank">

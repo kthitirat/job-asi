@@ -10,7 +10,7 @@
                 <div class="card-actions justify-end">
                     <Link v-if="!performance || (performance && !performance.is_published)" :href="route('form')"
                               class="btn btn-primary">
-                            แก้ไข
+                              ลงทะเบียนเข้าร่วมงาน
                     </Link>
                     <div v-if="performance && performance.is_published"
                              class="px-4 py-2 bg-green-700 rounded-md text-white opacity-50">

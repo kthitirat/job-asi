@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
         User::factory()->create([
             'role_id' => Role::where('name', 'user')->first()->id,
             'name' => 'คุณทดสอบ',
-            'institution' => 'มหาวิทยาล้ยนเรศวร',
+            'institution' => 'มหาวิทยาลัยนเรศวร',
             'tel' => '0885656566',
             'email' => 'test@test.com'
         ]);

@@ -19,6 +19,8 @@ use App\Exports\ArrayExporter;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SubmitFormEmail;
+use Spatie\Browsershot\Browsershot;
+use Illuminate\Validation\Rule;
 
 class PageController extends Controller
 {
@@ -156,6 +158,22 @@ class PageController extends Controller
         $newUser = $userAction->execute(new User(), $request->all());
         Auth::login($newUser);
         return redirect()->route('index');
+    }
+
+    public function performancePdfView(Performance $performance)
+    {
+        $performanceData = fractal($performance, new PerformanceTransformer())->includeImages()->toArray();
+        return view('pdf.performance_pdf')->with([
+            'performance' => $performanceData
+        ]);
+    }
+
+    public function performancePdfDownload(Performance $performance)
+    {
+        Browsershot::url(route('index'))
+            ->setNodeBinary('/opt/homebrew/lib/node_modules')
+            ->setNpmBinary('/opt/homebrew/bin/npm')
+            ->save('example.pdf');
     }
 
     public function print()
