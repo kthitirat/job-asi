@@ -430,8 +430,8 @@
         </div>
     </div>
 
-    {{-- <div class="w-full">
-        <p class="font-bold text-lg">รูป</p>
+    <div class="w-full">
+        <p class="font-bold text-lg">ภาพถ่ายการแสดง </p>
         <div class="w-full grid grid-cols-5 gap-4 mt-4">
             @foreach($performance['images']['data'] as $image)
                 <div class="w-full h-40 overflow-hidden">
@@ -441,7 +441,7 @@
                 </div>
             @endforeach
         </div>
-    </div> --}}
+    </div>
 
 </div>
 <p></p>

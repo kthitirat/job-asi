@@ -72,7 +72,6 @@ class PageController extends Controller
         return response()->json($data);
     }
 
-
  
     public function deleteImage(Performance $performance, Request $request)
     {
@@ -197,6 +196,88 @@ class PageController extends Controller
         return Excel::download(new ArrayExporter($data), 'test-export.xlsx');
     }
 
+    public function performanceExcelDownload(Performance $performance)
+    {
+        $performanceData = fractal($performance, new PerformanceTransformer())->includeImages()->toArray();
+        $data = [
+            ['ชื่อสถาบัน', $performanceData['owner']['institution']],
+            ['ชื่อผู้ประสานงาน', $performanceData['owner']['name']],
+            ['อีเมลล์', $performanceData['owner']['email']],
+            ['เบอร์โทรศัพท์', $performanceData['owner']['tel']],
+            ['ผู้บริหารสถาบันการศึกษา', $performanceData['institution_head_name']],
+            ['ตำแหน่งผู้บริหารสถาบันการศึกษา', $performanceData['institution_head_position']],
+            ['ตำแหน่งผู้ประสานงาน', $performanceData['coordinator_position']],
+            ['ชื่อชุดการการแสดง', $performanceData['name']],
+            ['ประเภทชุดการแสดง', implode(', ', $performanceData['type'])],
+            ['คำอธิบายประกอบชุดการแสดง', $performanceData['description']],
+            ['ระยะเวลาในการแสดง', $performanceData['duration']],
+            ['จำนวนนักแสดง', $performanceData['number_of_performers'] . ' คน'],
+            ['รายชื่อผู้ควบคุมการแสดง', $performanceData['directors']],
+            ['รายชื่อนักแสดง', $performanceData['performers']],
+            ['รายชื่อนักดนตรี/ผู้พากย์หรือผู้บรรยาย', $performanceData['musicians_or_narrators']],
+            ['จำนวนนักดนตรี', $performanceData['number_of_musicians'] . ' คน'],
+            ['การเปิดเรื่องหรือภาพแสดงเริ่มแรกบนเวที', $performanceData['opening_scene']],
+            ['การดำเนินเรื่องบนเวที', $performanceData['stage_performance']],
+            ['การจบเรื่อง', $performanceData['ending_scene']],
+            [
+                'ลักษณะการแต่งกายและอุปกรณ์ประกอบการแสดง (MAKE UP & COSTUME, PROPS)',
+                $performanceData['costume_and_props']
+            ],
+            ['การควบคุมแสงบนเวที', $performanceData['stage_lighting']],
+            ['ประเภทของเสียงประกอบการแสดง', $performanceData['sound_type']],
+            ['จำนวนไมค์โครโฟน', $performanceData['number_of_microphones'] . ' อัน'],
+            ['จำนวนตู้แอมป์', $performanceData['number_of_amplifiers'] . ' ตู้'],
+            ['อื่นๆ โปรดระบุ', $performanceData['other_specifications']],
+            ['การควบคุมเสียง', $performanceData['sound_control']],
+            ['รายชื่อผู้บริหาร/ผู้แทนสถาบัน', $performanceData['institution_representatives']],
+            ['รายชื่ออาจารย์ / เจ้าหน้าที่', $performanceData['faculty_and_staff']],
+            ['รายชื่อนักศึกษา', $performanceData['students']],
+            ['รายการยานพาหนะ', $performanceData['vehicles']],
+            ['วันที่เดินทางมาถึง', $performanceData['arrival_date']],
+            ['เวลาที่เดินทางมาถึง', $performanceData['arrival_time']],
+            ['วันที่เดินทางกลับ', $performanceData['departure_date']],
+            ['เวลาที่เดินทางกลับ', $performanceData['departure_time']],
+            ['ชื่อสถานที่พัก', $performanceData['accommodation']],
+            [
+                'ข้อมูลการเข้าร่วมพิธีเปิดและการเลี้ยงรับรอง จำนวนผู้บริหาร / ผู้แทนสถาบันการศึกษา ที่เข้าร่วม',
+                $performanceData['ceremony_and_reception_details']
+            ],
+            [
+                'จำนวนผู้บริหารเข้าร่วมพิธีเปิดและการเลี้ยงรับรอง',
+                $performanceData['number_of_institution_heads'] . ' ท่าน'
+            ],
+            [
+                'จำนวนอาจารย์ / เจ้าหน้าที่ เข้าร่วมพิธีเปิดและการเลี้ยงรับรอง',
+                $performanceData['number_of_faculty_and_staff'] . ' ท่าน'
+            ],
+            ['จำนวนนักศึกษา ที่เข้าร่วม', $performanceData['number_of_students'] . ' คน'],
+            [
+                'รูป 1',
+                isset($performanceData['images']['data'][0]) ? $performanceData['images']['data'][0]['url'] : '-'
+            ],
+            [
+                'รูป 2',
+                isset($performanceData['images']['data'][1]) ? $performanceData['images']['data'][1]['url'] : '-'
+            ],
+            [
+                'รูป 3',
+                isset($performanceData['images']['data'][2]) ? $performanceData['images']['data'][2]['url'] : '-'
+            ],
+            [
+                'รูป 4',
+                isset($performanceData['images']['data'][3]) ? $performanceData['images']['data'][3]['url'] : '-'
+            ],
+            [
+                'รูป 5',
+                isset($performanceData['images']['data'][4]) ? $performanceData['images']['data'][4]['url'] : '-'
+            ],
+        ];
+        $fileName = $performanceData['owner']['institution'] . ' - ' . $performanceData['owner']['name'] . ' - ' . $performanceData['owner']['tel'] . '.xlsx';
+        return Excel::download(new ArrayExporter($data), $fileName);
+    }
+
+
+
 //    public function login()
 //    {
 //        return Inertia::render('Auth/Login');
@@ -208,4 +289,5 @@ class PageController extends Controller
 //        $user = User::where('email', $request->email)->first();
 //        dd($request->all());
 //    }
+
 }
