@@ -26,6 +26,9 @@ class PageController extends Controller
 {
     public function index(Request $request)
     {     
+        if (Auth::user() && Auth::user()->role->name == 'admin') {
+            return redirect()->route('dashboard.index');
+        }
         $performance = Performance::where('user_id', Auth::id())->first();
         $performanceData = null;
         if($performance){
@@ -133,9 +136,9 @@ class PageController extends Controller
     {
         $user = Auth::user();
         return Inertia::render('Dashboard/Index')->with([
-            'user' => $user,
-            'number' => 9,
-            'date' => "9-3-2567",
+            // 'user' => $user,
+            // 'number' => 9,
+            // 'date' => "9-3-2567",
         ]);
     }
 
@@ -210,7 +213,7 @@ class PageController extends Controller
             ['ชื่อชุดการการแสดง', $performanceData['name']],
             ['ประเภทชุดการแสดง', implode(', ', $performanceData['type'])],
             ['คำอธิบายประกอบชุดการแสดง', $performanceData['description']],
-            ['ระยะเวลาในการแสดง', $performanceData['duration']],
+            ['ระยะเวลาในการแสดง', $performanceData['duration']. ' ชม.'],
             ['จำนวนนักแสดง', $performanceData['number_of_performers'] . ' คน'],
             ['รายชื่อผู้ควบคุมการแสดง', $performanceData['directors']],
             ['รายชื่อนักแสดง', $performanceData['performers']],

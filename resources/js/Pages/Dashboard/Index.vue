@@ -1,17 +1,8 @@
 <template>
     <Layout>
-        <p>
-            Hello {{ user.id }}, How are you doing?
-        </p>
-
-        <p>
-            Hello {{ number  }}, How are you doing?
-        </p>  
-
-        
-        <p>
-            Hello {{ date  }}, How are you doing?
-        </p>
+        <div>
+            
+        </div>
     </Layout>
 
 </template>
@@ -22,18 +13,7 @@ export default {
     name: "DashboardIndex",
     components: {Layout},
     props: {
-        user: {
-            type: Object,
-            required: true
-        },
-        number: {
-            type: Number,
-            default: 0
-        },
-        date: {
-            type: String,
-            default: "" 
-        }
+       
     },
     mounted() {
     },

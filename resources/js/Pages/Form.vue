@@ -631,9 +631,10 @@
                     <p>3. หากกรอกข้อมูลครบถ้วนแล้ว กรุณากดส่งข้อมูล</p>
                 </div>
 
-                <div v-if="performance.length !== 0 && performance.is_published" class="col-span-2 w-full mt-2 flex gap-2 justify-end">
+                <div v-if="performanceId && !performance.is_published" 
+                        class="col-span-2 w-full mt-2 flex gap-2 justify-end">
                         <!-- <button :disabled="isSubmitting" class="btn btn-warning text-white" type="button" @click.prevent="saveDraft">บันทึกร่าง</button> -->
-                        <button :disabled="isSubmitting" class="btn btn-success"
+                        <button :disabled="isSubmitting" class="btn btn-success text-white"
                                 @click.prevent="submit">                                   
                                 ส่งข้อมูล
                         </button>

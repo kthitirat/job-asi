@@ -10,7 +10,7 @@ use App\Http\Controllers\SubjectController;
 
 
 //Route::get('/login', [PageController::class, 'login'])
-//    ->name('login');
+//   ->name('login');
 //Route::post('/login', [PageController::class, 'doLogin']);
 if (Features::enabled(Features::registration())) {
     Route::get('/register', [PageController::class, 'userRegister'])
