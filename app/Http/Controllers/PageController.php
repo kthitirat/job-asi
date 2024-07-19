@@ -272,7 +272,7 @@ class PageController extends Controller
                 isset($performanceData['images']['data'][4]) ? $performanceData['images']['data'][4]['url'] : '-'
             ],
         ];
-        $fileName = $performanceData['owner']['institution'] . ' - ' . $performanceData['owner']['name'] . ' - ' . $performanceData['owner']['tel'] . '.xlsx';
+        $fileName = $performanceData['owner']['institution'] . ' - ' . $performanceData['owner']['name'] . ' - ' . $performanceData['owner']['tel'] . '.xlsx';  //แสดงชื่อเวลาดาวน์โหลดมาที่เครื่อง
         return Excel::download(new ArrayExporter($data), $fileName);
     }
 

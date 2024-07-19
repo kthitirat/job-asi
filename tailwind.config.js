@@ -19,7 +19,7 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Chakra Petch','Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Trirong','Figtree', ...defaultTheme.fontFamily.sans],
                 //serif: ['Pridi', ...defaultTheme.fontFamily.sans],    //เปลี่ยน font จาก google
                
             },

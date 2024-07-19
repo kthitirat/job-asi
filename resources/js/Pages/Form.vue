@@ -7,14 +7,18 @@
         <p class="text-lx text-center">ระหว่างวันที่ XXXXXXX 2568 ณ มหาวิทยาลัยราชภัฏพระนครศรีอยุธยา</p>
         <div class="bg-white w-full shadow-lg rounded-xl px-8 py-8 mt-4">
             <form>
-                <div v-if="performance.length != 0" class="flex w-full justify-end pr-4 gap-2 items-center">
-                    <a :href="route('performance_excel_download',performance.id)" target="_blank">
-                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="35" height="35" viewBox="0 0 50 50">
-                        <path d="M 28.875 0 C 28.855469 0.0078125 28.832031 0.0195313 28.8125 0.03125 L 0.8125 5.34375 C 0.335938 5.433594 -0.0078125 5.855469 0 6.34375 L 0 43.65625 C -0.0078125 44.144531 0.335938 44.566406 0.8125 44.65625 L 28.8125 49.96875 C 29.101563 50.023438 29.402344 49.949219 29.632813 49.761719 C 29.859375 49.574219 29.996094 49.296875 30 49 L 30 44 L 47 44 C 48.09375 44 49 43.09375 49 42 L 49 8 C 49 6.90625 48.09375 6 47 6 L 30 6 L 30 1 C 30.003906 0.710938 29.878906 0.4375 29.664063 0.246094 C 29.449219 0.0546875 29.160156 -0.0351563 28.875 0 Z M 28 2.1875 L 28 6.53125 C 27.867188 6.808594 27.867188 7.128906 28 7.40625 L 28 42.8125 C 27.972656 42.945313 27.972656 43.085938 28 43.21875 L 28 47.8125 L 2 42.84375 L 2 7.15625 Z M 30 8 L 47 8 L 47 42 L 30 42 L 30 37 L 34 37 L 34 35 L 30 35 L 30 29 L 34 29 L 34 27 L 30 27 L 30 22 L 34 22 L 34 20 L 30 20 L 30 15 L 34 15 L 34 13 L 30 13 Z M 36 13 L 36 15 L 44 15 L 44 13 Z M 6.6875 15.6875 L 12.15625 25.03125 L 6.1875 34.375 L 11.1875 34.375 L 14.4375 28.34375 C 14.664063 27.761719 14.8125 27.316406 14.875 27.03125 L 14.90625 27.03125 C 15.035156 27.640625 15.160156 28.054688 15.28125 28.28125 L 18.53125 34.375 L 23.5 34.375 L 17.75 24.9375 L 23.34375 15.6875 L 18.65625 15.6875 L 15.6875 21.21875 C 15.402344 21.941406 15.199219 22.511719 15.09375 22.875 L 15.0625 22.875 C 14.898438 22.265625 14.710938 21.722656 14.5 21.28125 L 11.8125 15.6875 Z M 36 20 L 36 22 L 44 22 L 44 20 Z M 36 27 L 36 29 L 44 29 L 44 27 Z M 36 35 L 36 37 L 44 37 L 44 35 Z"></path>
-                        </svg>
-                    </a>
-                    <a class="currsor-pointer" :href="route('performance_pdf_view',performance.id)" target="_blank">
-                        <svg id="Capa_1" fill="#000000" height="30px" version="1.1" viewBox="0 0 48 48"
+                <div></div>
+                <div v-if="performanceId" class="flex w-full justify-end pr-4 gap-4 items-center">
+                    <div v-if="$page.props.user.role.name === 'admin'">
+                        <a :href="route('performance_excel_download',performanceId)" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="35" height="35" viewBox="0 0 50 50">
+                            <path d="M 28.875 0 C 28.855469 0.0078125 28.832031 0.0195313 28.8125 0.03125 L 0.8125 5.34375 C 0.335938 5.433594 -0.0078125 5.855469 0 6.34375 L 0 43.65625 C -0.0078125 44.144531 0.335938 44.566406 0.8125 44.65625 L 28.8125 49.96875 C 29.101563 50.023438 29.402344 49.949219 29.632813 49.761719 C 29.859375 49.574219 29.996094 49.296875 30 49 L 30 44 L 47 44 C 48.09375 44 49 43.09375 49 42 L 49 8 C 49 6.90625 48.09375 6 47 6 L 30 6 L 30 1 C 30.003906 0.710938 29.878906 0.4375 29.664063 0.246094 C 29.449219 0.0546875 29.160156 -0.0351563 28.875 0 Z M 28 2.1875 L 28 6.53125 C 27.867188 6.808594 27.867188 7.128906 28 7.40625 L 28 42.8125 C 27.972656 42.945313 27.972656 43.085938 28 43.21875 L 28 47.8125 L 2 42.84375 L 2 7.15625 Z M 30 8 L 47 8 L 47 42 L 30 42 L 30 37 L 34 37 L 34 35 L 30 35 L 30 29 L 34 29 L 34 27 L 30 27 L 30 22 L 34 22 L 34 20 L 30 20 L 30 15 L 34 15 L 34 13 L 30 13 Z M 36 13 L 36 15 L 44 15 L 44 13 Z M 6.6875 15.6875 L 12.15625 25.03125 L 6.1875 34.375 L 11.1875 34.375 L 14.4375 28.34375 C 14.664063 27.761719 14.8125 27.316406 14.875 27.03125 L 14.90625 27.03125 C 15.035156 27.640625 15.160156 28.054688 15.28125 28.28125 L 18.53125 34.375 L 23.5 34.375 L 17.75 24.9375 L 23.34375 15.6875 L 18.65625 15.6875 L 15.6875 21.21875 C 15.402344 21.941406 15.199219 22.511719 15.09375 22.875 L 15.0625 22.875 C 14.898438 22.265625 14.710938 21.722656 14.5 21.28125 L 11.8125 15.6875 Z M 36 20 L 36 22 L 44 22 L 44 20 Z M 36 27 L 36 29 L 44 29 L 44 27 Z M 36 35 L 36 37 L 44 37 L 44 35 Z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                    <div v-if="performance.is_published || $page.props.user.role.name === 'admin'">                     
+                        <a class="currsor-pointer" :href="route('performance_pdf_view',performance.id)" target="_blank">
+                            <svg id="Capa_1" fill="#000000" height="30px" version="1.1" viewBox="0 0 48 48"
                              width="30px" xml:space="preserve"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -25,10 +29,13 @@
                                 <polygon
                                     points="30.723,38 32.78,38 32.78,32.832 35.857,32.832 35.857,31.081 32.764,31.081 32.764,27.8 36.112,27.8 36.112,25.964 30.723,25.964 "></polygon>
                                 <path
-                                    d="M24.076,25.964H21.05V38h3.009c1.553,0,2.729-0.524,3.528-1.572c0.799-1.049,1.198-2.525,1.198-4.429 c0-1.904-0.399-3.386-1.198-4.446C26.788,26.494,25.618,25.964,24.076,25.964z M26.55,33.843c-0.13,0.528-0.315,0.967-0.552,1.318 c-0.238,0.351-0.521,0.615-0.85,0.79c-0.329,0.176-0.686,0.264-1.071,0.264h-0.969v-8.466h0.969c0.385,0,0.742,0.088,1.071,0.264 c0.329,0.175,0.612,0.439,0.85,0.79c0.238,0.351,0.422,0.793,0.552,1.326s0.196,1.156,0.196,1.87 C26.746,32.702,26.68,33.316,26.55,33.843z"></path> </g> </g> </g></svg>
-                    </a>
-                    <div v-if="performance.length != 0">
-                        <a :href="route('performance_view',this.performance.id)"
+                                    d="M24.076,25.964H21.05V38h3.009c1.553,0,2.729-0.524,3.528-1.572c0.799-1.049,1.198-2.525,1.198-4.429 c0-1.904-0.399-3.386-1.198-4.446C26.788,26.494,25.618,25.964,24.076,25.964z M26.55,33.843c-0.13,0.528-0.315,0.967-0.552,1.318 c-0.238,0.351-0.521,0.615-0.85,0.79c-0.329,0.176-0.686,0.264-1.071,0.264h-0.969v-8.466h0.969c0.385,0,0.742,0.088,1.071,0.264 c0.329,0.175,0.612,0.439,0.85,0.79c0.238,0.351,0.422,0.793,0.552,1.326s0.196,1.156,0.196,1.87 C26.746,32.702,26.68,33.316,26.55,33.843z"></path> </g> </g> </g>
+                                </svg>
+                        </a>
+                    </div>
+                    
+                    <div>
+                        <a :href="route('performance_view',performanceId)"
                            class="text-green-600" target="_blank">
                             <svg class="size-8" fill="none" stroke="currentColor" stroke-width="1.5"
                                  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -140,7 +147,7 @@
                             <div class="label">
                                 <span class="label-text">หมายเลขโทรศัพท์ผู้ประสานงานประจำสถาบัน</span>
                             </div>
-                            <input v-model="form.coordinator_phone" class="input input-bordered w-full" placeholder="หมายเลขโทรศัพท์" type="text"/>
+                            <input v-model="form.coordinator_phone" class="input input-bordered w-full" placeholder="หมายเลขโทรศัพท์" type="text" disabled/>
                         </label>
                         <div v-if="$page.props.errors.coordinator_phone" class="text-red-500 text-sm">
                             {{ $page.props.errors.coordinator_phone }}
@@ -580,21 +587,28 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-4">แนบภาพถ่ายการแสดง </div>
+                <div class="mt-4">แนบภาพถ่ายการแสดง จำนวน 5 ภาพ </div>
                 <input ref="imageInputRef" accept=".jpeg,.png,.jpg" class="hidden" type="file" @change="handleSelectImage">
                 <div class="col-span-2 w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-8">
-                    <div v-for="(image, index) in displayImages" :key="index" class="relative w-full h-60 overflow-hidden">
-                        <img :src="image.url" class="object-cover w-full h-full">
-                        <button v-if="!isSubmitting" @click.prevent="handleDeleteImage(image)" type="button" class="absolute top-1 right-1 text-red-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                            </svg>
-                        </button>
-                        <div v-if="isSubmitting" 
-                            class="absolute top-0 left-0 w-full h-60 bg-white opacity-50 flex items-center justify-center">
-                            <span class="loading loading-spinner loading-lg"></span>
+                        <div v-for="(image,index) in displayImages" :key="index"
+                             class="w-full h-20 md:h-36 lg:h-48 xl:h-60 overflow-hidden">
+                            <div class="h-20 md:h-36 lg:h-48 xl:h-60 relative">
+                                <img :src="image.url" class="object-contain w-full h-20 md:h-36 lg:h-48 xl:h-60">
+                                <button v-if="!isSubmitting" class="absolute top-1 right-1 text-red-500" type="button"
+                                        @click.prevent="handleDeleteImage(image)">
+                                    <svg class="size-6" fill="none" stroke="currentColor"
+                                         stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                                              stroke-linecap="round"
+                                              stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                <div v-if="isSubmitting"
+                                     class="absolute top-0 left-0 w-full h-60 bg-white opacity-50 flex items-center justify-center">
+                                    <span class="loading loading-spinner loading-lg"></span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
                         <button 
                             v-if="displayImages.length < maxImage"
                             class="w-full h-20 md:h-36 lg:h-48 xl:h-60 border-2 border-dashed flex justify-center items-center text-gray-500" type="button"
@@ -617,7 +631,7 @@
                     <p>3. หากกรอกข้อมูลครบถ้วนแล้ว กรุณากดส่งข้อมูล</p>
                 </div>
 
-                <div class="col-span-2 w-full mt-2 flex gap-2 justify-end">
+                <div v-if="performance.length !== 0 && performance.is_published" class="col-span-2 w-full mt-2 flex gap-2 justify-end">
                         <!-- <button :disabled="isSubmitting" class="btn btn-warning text-white" type="button" @click.prevent="saveDraft">บันทึกร่าง</button> -->
                         <button :disabled="isSubmitting" class="btn btn-success"
                                 @click.prevent="submit">                                   
@@ -663,6 +677,7 @@ export default {
     },
     data() {
         return {
+            performanceId: null,
             isSubmitting: false,
             isSending: false,
             dirtyForm: false,
@@ -671,10 +686,10 @@ export default {
             maxImage: 5,             
             form: useForm({
                 performance_id: this.performance.id,
-                institution: this.$page.props.user.institution,     
-                email: this.$page.props.user.email,               
-                coordinator_name: this.$page.props.user.name,                                         
-                coordinator_phone: this.$page.props.user.tel,   
+                institution: this.$page.props.user.role.name === 'admin' ? this.performance.owner.institution : this.$page.props.user.institution,     
+                email: this.$page.props.user.role.name === 'admin' ? this.performance.owner.email : this.$page.props.user.email,               
+                coordinator_name: this.$page.props.user.role.name === 'admin' ? this.performance.owner.name : this.$page.props.user.name,                                        
+                coordinator_phone: this.$page.props.user.role.name === 'admin' ? this.performance.owner.tel : this.$page.props.user.tel, 
                 institution_head_name: this.performance.institution_head_name ?? "",
                 institution_head_position: this.performance.institution_head_position ?? "",   
                 coordinator_position: this.performance.coordinator_position ?? "",           
@@ -859,5 +874,28 @@ export default {
     .note {
     line-height: 1.8; /* กำหนดระยะห่างของบรรทัด */
     }
+
+    .image-container {
+        position: relative;
+        width: 100%;
+        height: 15rem; /* h-60 in Tailwind */
+        overflow: hidden;
+}
+
+    .image-full {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+}
+    span {
+        font-size: 1.10rem;
+    }
+    input {
+        font-size: 1rem; /* ขนาดตัวอักษรที่ต้องการ เช่น 1.25rem */
+    }
+    textarea{
+        font-size: 1rem; /* ขนาดตัวอักษรที่ต้องการ เช่น 1.25rem */
+    }
+
 </style>
 

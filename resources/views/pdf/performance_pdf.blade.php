@@ -393,7 +393,7 @@
     <div class="grid grid-cols-12 gap-2">
         <div class="col-span-3">
             ข้อมูลการเข้าร่วมพิธีเปิดและการเลี้ยงรับรอง
-            จำนวนผู้บริหาร / ผู้แทนสถาบันการศึกษา ที่เข้าร่วม
+           
         </div>
         <div class="col-span-9">
             {{$performance['ceremony_and_reception_details']}}
@@ -403,7 +403,7 @@
     <!-- Number of Institution Heads -->
     <div class="grid grid-cols-12 gap-2">
         <div class="col-span-3">
-            จำนวนผู้บริหารเข้าร่วมพิธีเปิดและการเลี้ยงรับรอง
+            จำนวนผู้บริหาร / ผู้แทนสถาบันการศึกษา ที่เข้าร่วม
         </div>
         <div class="col-span-9">
             {{$performance['number_of_institution_heads']}}
