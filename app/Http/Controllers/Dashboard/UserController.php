@@ -15,7 +15,7 @@ class UserController extends Controller
 {
     public function index() 
     {
-        $users = User::paginate(30);
+        $users = User::orderBy('created_at', 'desc')->paginate(30);
         $userData = fractal($users, new UserTransformer())->toArray();
         return Inertia::render('Dashboard/User/Index')->with([
             'users' => $userData

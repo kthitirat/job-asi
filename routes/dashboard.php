@@ -13,12 +13,14 @@ use App\Http\Controllers\Dashboard\PerformanceController;
 Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::prefix('dashboard')->as('dashboard.')->group(function () {
         Route::get('/', [PageController::class, 'dashboard'])->name('index');
-
-
         Route::resource('users', UserController::class);
         Route::resource('performances', PerformanceController::class);
         Route::post('performances/{performance}/toggle-publish', [PerformanceController::class, 'togglePubish'])
                 ->name('performances.toggle_publish');
+
+                
+    });
+});
 
 
         
@@ -48,7 +50,6 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
 //        //     ->name('applicants.create');
 //        Route::get('/applicants/{applicant}', [ApplicantController::class, 'show'])
 //            ->name('applicants.show');
-    });
-});
+
 
 

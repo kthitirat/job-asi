@@ -2,7 +2,8 @@
     <Layout>
         <div v-if="$page.props.user && $page.props.user.role.name ==='user'" class="card shadow-xl flex items-center justify-center">
             <figure>
-                <img src="https://picsum.photos/928/548" alt="Shoes" class="rounded-image">
+                <!-- <img src="https://picsum.photos/928/548" alt="Shoes" class="rounded-image"> -->
+                <img :src="coverImage" alt="cover" class="rounded-image">
             </figure>
             <div class="card-body flex items-center">
                 <h2 class="card-title">งานศิลปวัฒนธรรมอุดมศึกษาครั้งที่ 23</h2>
@@ -54,10 +55,10 @@ export default {
     computed: {
         coverImage() {
             if (!this.performance) {
-                return '/images/logo.jpg';
+                return '/images/thai-dance.jpg';
             }
             if (this.performance.images.data.length === 0) {
-                return '/images/logo.jpg'
+                return '/images/thai-dance.jpg'
             }
             return this.performance.images.data[0].url;
         }

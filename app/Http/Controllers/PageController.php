@@ -135,11 +135,14 @@ class PageController extends Controller
     public function dashboard()
     {
         $user = Auth::user();
-        // $performanceCount = Performance::count();
-        // $publishedPerformanceCount = Performance::where('is_published', true)->count();
+        $performanceCount = Performance::count();
+        $publishedPerformanceCount = Performance::where('is_published', true)->count();
+        $performance = Performance::where('is_published', true)->orderBy('updated_at', 'desc')->get();
+        $performanceData = fractal($performance, new PerformanceTransformer())->toArray()['data'];
         return Inertia::render('Dashboard/Index')->with([
-            // 'performanceCount' => $performanceCount,
-            // 'publishedPerformanceCount' => $publishedPerformanceCount
+            'performanceCount' => $performanceCount,
+            'publishedPerformanceCount' => $publishedPerformanceCount,
+            'performances' => $performanceData
         ]);
     }
 

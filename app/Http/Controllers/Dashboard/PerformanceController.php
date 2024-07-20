@@ -10,9 +10,9 @@ use Inertia\Inertia;
 
 class PerformanceController extends Controller
 {
-    public function index()
+    public function index()  
     {
-        $performances = Performance::paginate(20);
+        $performances = Performance::orderBy('created_at', 'desc')->paginate(20);
         $performanceData = fractal($performances, new PerformanceTransformer())->toArray();
         return Inertia::render('Dashboard/Performance/Index')->with([
             'performances' => $performanceData

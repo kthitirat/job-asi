@@ -1,7 +1,7 @@
 <template>
     <Layout>
         <div class="flex justify-end">
-            <Link :href="route('dashboard.performances.create')" class="uppercase btn btn-primary">New performance</Link>
+            <!-- <Link :href="route('dashboard.performances.create')" class="uppercase btn btn-primary">New performance</Link> -->
         </div>
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500">

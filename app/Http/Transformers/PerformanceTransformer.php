@@ -59,7 +59,9 @@ class PerformanceTransformer extends TransformerAbstract
             'is_published' => (bool)$performance->is_published,
             'created_at' => $performance->created_at->format('Y-m-d H:i:s'),
             'updated_at' => $performance->updated_at->format('Y-m-d H:i:s'),
-            'submitted_at' => $performance->updated_at->format('d/m/Y'),
+            // 'submitted_at' => $performance->updated_at->format('d/m/Y'),
+            'submitted_at' => $performance->updated_at ? Carbon::parse($performance->updated_at)
+                ->thaidate('j M Y') : null,
             'owner' => fractal($performance->owner, new UserTransformer())->toArray()
         ];
         return $data;

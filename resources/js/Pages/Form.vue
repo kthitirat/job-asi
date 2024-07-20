@@ -44,7 +44,7 @@
                     
                     <div>
                            <a :href="route('performance_view',performanceId)"
-                           class="text-green-600" target="_blank">
+                           class="text-blue-200" target="_blank">
                             <svg class="size-8" fill="none" stroke="currentColor" stroke-width="1.5"
                                  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path
