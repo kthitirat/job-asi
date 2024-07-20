@@ -3,7 +3,7 @@
         <nav class="bg-blue-300 fixed top-0 z-30 w-full">
             <div class="navbar">
                 <div class="flex-1">
-                    <a class="btn btn-ghost text-xl">Logo555</a>
+                    <a class="btn btn-ghost text-xl">การลงทะเบียนเข้าร่วมงานศิลปวัฒนธรรมอุดมศึกษาครั้งที่ 23</a>
                 </div>
                 <div class="flex-none gap-2">
                     <div class="dropdown dropdown-end">
@@ -64,14 +64,15 @@ import FlashMessage from "@/Components/FlashMessage.vue";
 export default {
     name: "DashboardLayout",
     methods: {
-        visit(route) {
-            router.visit(this.route(route))
-        },
-        toggleSmallMenu() {
-            this.showSmallMenu = !this.showSmallMenu;
-        },
+        // visit(route) {
+        //     router.visit(this.route(route))
+        // },
+        // toggleSmallMenu() {
+        //     this.showSmallMenu = !this.showSmallMenu;
+        // },
         logout() {
             Inertia.post(this.route('logout'));
+           
         }
     },
     components: {SideBar, Link, FlashMessage},

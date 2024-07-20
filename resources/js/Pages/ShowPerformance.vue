@@ -427,7 +427,7 @@
                         </div>
                     </div>
                 </div>
-                <p>รูป</p>
+                <p>ภาพถ่ายการแสดง จำนวน 5 ภาพ </p>
                 <div class="w-full grid grid-cols-5 gap-4 mt-4">
                     <div v-for="(image,index) in displayImages" :key="index"
                          class="w-full h-20 md:h-36 lg:h-48 xl:h-60 overflow-hidden">

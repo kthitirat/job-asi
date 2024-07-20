@@ -2,12 +2,20 @@
     <Layout>
         <div class="flex w-full justify-center mb-8 mt-4">
             <img class="object-cover w-40 h-45" src="/images/Aru-Logo61-2X3.png">
+        <!-- <div class="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-full overflow-hidden">
+            <img class="object-cover w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40" src="/images/logo.jpg"> -->
         </div>
-        <h1 class="text-3xl font-bold text-center">การลงทะเบียนเข้าร่วมงานศิลปวัฒนธรรมอุดมศึกษาครั้งที่ 23</h1>
-        <p class="text-lx text-center">ระหว่างวันที่ XXXXXXX 2568 ณ มหาวิทยาลัยราชภัฏพระนครศรีอยุธยา</p>
+        <!-- <h1 class="text-3xl font-bold text-center">การลงทะเบียนเข้าร่วมงานศิลปวัฒนธรรมอุดมศึกษาครั้งที่ 23</h1>
+        <p class="text-lx text-center">ระหว่างวันที่ XXXXXXX 2568 ณ มหาวิทยาลัยราชภัฏพระนครศรีอยุธยา</p> -->
+        <h1 class="text-base md:text-xl lg:text-3xl font-bold text-center">
+            การลงทะเบียนเข้าร่วมงานศิลปวัฒนธรรมอุดมศึกษาครั้งที่
+            23
+        </h1>
+        <p class="text-sm md:text-base lg:text-2lx text-center">
+            ระหว่างวันที่ 23-25 กุมภาพันธ์ 2567 ณ มหาวิทยาลัยxxx
+        </p>
         <div class="bg-white w-full shadow-lg rounded-xl px-8 py-8 mt-4">
-            <form>
-                <div></div>
+            <form>                
                 <div v-if="performanceId" class="flex w-full justify-end pr-4 gap-4 items-center">
                     <div v-if="$page.props.user.role.name === 'admin'">
                         <a :href="route('performance_excel_download',performanceId)" target="_blank">
@@ -16,8 +24,8 @@
                             </svg>
                         </a>
                     </div>
-                    <div v-if="performance.is_published || $page.props.user.role.name === 'admin'">                     
-                        <a class="currsor-pointer" :href="route('performance_pdf_view',performance.id)" target="_blank">
+                    <div v-if="performance.is_published || $page.props.user.role.name === 'admin'">
+                        <a :href="route('performance_pdf_view',performanceId)" class="cursor-pointer" target="_blank">
                             <svg id="Capa_1" fill="#000000" height="30px" version="1.1" viewBox="0 0 48 48"
                              width="30px" xml:space="preserve"
                              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -35,7 +43,7 @@
                     </div>
                     
                     <div>
-                        <a :href="route('performance_view',performanceId)"
+                           <a :href="route('performance_view',performanceId)"
                            class="text-green-600" target="_blank">
                             <svg class="size-8" fill="none" stroke="currentColor" stroke-width="1.5"
                                  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -631,12 +639,11 @@
                     <p>3. หากกรอกข้อมูลครบถ้วนแล้ว กรุณากดส่งข้อมูล</p>
                 </div>
 
-                <div v-if="performanceId && !performance.is_published" 
-                        class="col-span-2 w-full mt-2 flex gap-2 justify-end">
-                        <!-- <button :disabled="isSubmitting" class="btn btn-warning text-white" type="button" @click.prevent="saveDraft">บันทึกร่าง</button> -->
-                        <button :disabled="isSubmitting" class="btn btn-success text-white"
-                                @click.prevent="submit">                                   
-                                ส่งข้อมูล
+                <div v-if="performanceId && !performance.is_published"
+                         class="col-span-2 w-full mt-2 flex gap-4 justify-end">
+                        <button :disabled="isSubmitting" class="btn btn-primary text-white" type="button"
+                                @click.prevent="submit">
+                            ส่งข้อมูล
                         </button>
                 </div>
                 <button ref="showSendingEmailModal" class="btn hidden" onclick="sending_email.showModal()" type="button">open modal</button>
@@ -687,8 +694,8 @@ export default {
             maxImage: 5,             
             form: useForm({
                 performance_id: this.performance.id,
-                institution: this.$page.props.user.role.name === 'admin' ? this.performance.owner.institution : this.$page.props.user.institution,     
-                email: this.$page.props.user.role.name === 'admin' ? this.performance.owner.email : this.$page.props.user.email,               
+                institution: this.$page.props.user.role.name === 'admin' ? this.performance.owner.institution : this.$page.props.user.institution,  
+                email: this.$page.props.user.role.name === 'admin' ? this.performance.owner.email : this.$page.props.user.email,             
                 coordinator_name: this.$page.props.user.role.name === 'admin' ? this.performance.owner.name : this.$page.props.user.name,                                        
                 coordinator_phone: this.$page.props.user.role.name === 'admin' ? this.performance.owner.tel : this.$page.props.user.tel, 
                 institution_head_name: this.performance.institution_head_name ?? "",
@@ -889,7 +896,7 @@ export default {
         object-fit: cover;
 }
     span {
-        font-size: 1.10rem;
+        font-size: 1rem;
     }
     input {
         font-size: 1rem; /* ขนาดตัวอักษรที่ต้องการ เช่น 1.25rem */

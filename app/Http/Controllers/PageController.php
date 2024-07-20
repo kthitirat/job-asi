@@ -32,7 +32,7 @@ class PageController extends Controller
         $performance = Performance::where('user_id', Auth::id())->first();
         $performanceData = null;
         if($performance){
-            $performanceData = fractal($performance, new PerformanceTransformer())->toArray();
+            $performanceData = fractal($performance, new PerformanceTransformer())->includeImages()->toArray();
         }
         return Inertia::render('Index')->with([
             'performance' => $performanceData
@@ -135,10 +135,11 @@ class PageController extends Controller
     public function dashboard()
     {
         $user = Auth::user();
+        // $performanceCount = Performance::count();
+        // $publishedPerformanceCount = Performance::where('is_published', true)->count();
         return Inertia::render('Dashboard/Index')->with([
-            // 'user' => $user,
-            // 'number' => 9,
-            // 'date' => "9-3-2567",
+            // 'performanceCount' => $performanceCount,
+            // 'publishedPerformanceCount' => $publishedPerformanceCount
         ]);
     }
 

@@ -1,6 +1,6 @@
 <template>
     <Layout>
-        <div v-if="$page.props.user.role.name === 'user'" class="card shadow-xl flex items-center justify-center">
+        <div v-if="$page.props.user && $page.props.user.role.name ==='user'" class="card shadow-xl flex items-center justify-center">
             <figure>
                 <img src="https://picsum.photos/928/548" alt="Shoes" class="rounded-image">
             </figure>
