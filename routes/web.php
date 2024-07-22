@@ -21,6 +21,11 @@ if (Features::enabled(Features::registration())) {
 Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get('/form', [PageController::class, 'form'])->name('form');
+
+    Route::get('/institution-profile', [PageController::class, 'institutionProfile'])->name('institution_profile');
+    Route::post('/institution-profile', [PageController::class, 'updateInstitutionProfile'])->name('update_institution_profile');
+
+
     Route::post('/form/save-draft', [PageController::class, 'saveDraft'])->name('save_draft');
     Route::patch('/form/{performance}/submit', [PageController::class, 'submitForm'])->name('submit_form');
 

@@ -1,23 +1,31 @@
 <template>
     <Layout>
-        <div class="flex flex-wrap gap-4 z-0">
-            <div class="card bg-blue-300 w-96 shadow-xl">
-                <div class="card-body">
-                    <h2 class="card-title text-blue-600">แสดงข้อมูลจำนวนสถาบันการศึกษาที่ลงทะเบียนทั้งหมด</h2>
-                    <div class="flex w-full justify-end">
-                        <div class="text-4xl font-bold">{{ performanceCount }} สถาบัน</div>
-                    </div>
-                </div>
-            </div>
-            <div class="card bg-blue-300 w-96 shadow-xl">
-                <div class="card-body">
-                    <h2 class="card-title text-blue-600">แสดงข้อมูลสถาบันการศึกษาที่ส่งข้อมูลลงทะเบียนเข้าร่วมงานแล้ว</h2>
-                    <div class="flex w-full justify-end">
-                        <div class="text-4xl font-bold">{{ publishedPerformanceCount }} สถาบัน</div>
-                    </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="card bg-blue-300 shadow-xl">
+            <div class="card-body">
+                <h2 class="card-title text-blue-600">Show ทั้งหมด</h2>
+                <div class="flex w-full justify-end">
+                    <div class="text-4xl font-bold">{{ performanceCount }}</div>
                 </div>
             </div>
         </div>
+        <div class="card bg-blue-300 shadow-xl">
+            <div class="card-body">
+                <h2 class="card-title text-blue-600">ที่ส่งแล้ว</h2>
+                <div class="flex w-full justify-end">
+                    <div class="text-4xl font-bold">{{ publishedPerformanceCount }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="card bg-blue-300 shadow-xl">
+            <div class="card-body">
+                <h2 class="card-title text-blue-600">ที่ยังไม่ส่งแล้ว</h2>
+                <div class="flex w-full justify-end">
+                    <div class="text-4xl font-bold">{{ unpublishedPerformanceCount }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
         <div>
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-6">
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500">
@@ -77,6 +85,10 @@ export default {
         },
         performances: {
             type: Array,
+            required: true
+        },
+        performance:{
+            type: Number,
             required: true
         }
     },

@@ -6,6 +6,7 @@ use App\Actions\RegisterUserAction;
 use App\Http\Transformers\SubjectTransformer;
 use App\Actions\Dashboard\SavePerformanceAction;
 use App\Http\Requests\Dashboard\SavePerformanceDraftRequest;
+use App\Actions\Dashboard\SaveUserAction;
 use App\Http\Transformers\PerformanceTransformer;
 use App\Http\Transformers\ImageTransformer;
 use App\Models\Subject;
@@ -21,6 +22,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\SubmitFormEmail;
 use Spatie\Browsershot\Browsershot;
 use Illuminate\Validation\Rule;
+use App\Models\Role;
 
 class PageController extends Controller
 {
@@ -37,6 +39,29 @@ class PageController extends Controller
         return Inertia::render('Index')->with([
             'performance' => $performanceData
         ]);
+    }
+
+    public function institutionProfile()
+    {
+        return Inertia::render('InstitutionProfile')->with([]);
+    }
+
+    public function updateInstitutionProfile(Request $request, SaveUserAction $action)
+    {
+        // ดึงข้อมูลผู้ใช้ที่เข้าสู่ระบบอยู่
+        $user = Auth::user();        
+
+        // ตรวจสอบและอัพเดตข้อมูลโปรไฟล์ของผู้ใช้
+        $req = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255', 'unique:users,email,' . $user->id],
+            'tel' => ['nullable', 'string', 'max:10'],
+            'institution' => ['required', 'string', 'max:255', 'unique:users,institution,' . $user->id],
+            'password' => ['nullable', 'string', 'min:6', 'confirmed'],
+        ]);
+        $req['role_id'] = Role::where('name', 'user')->first()->id;
+        $action->execute($user, $req);
+        return redirect()->back();
     }
 
     public function form()
@@ -137,12 +162,14 @@ class PageController extends Controller
         $user = Auth::user();
         $performanceCount = Performance::count();
         $publishedPerformanceCount = Performance::where('is_published', true)->count();
+        $unpublishedPerformanceCount = Performance::where('is_published', false)->count();
         $performance = Performance::where('is_published', true)->orderBy('updated_at', 'desc')->get();
         $performanceData = fractal($performance, new PerformanceTransformer())->toArray()['data'];
         return Inertia::render('Dashboard/Index')->with([
             'performanceCount' => $performanceCount,
             'publishedPerformanceCount' => $publishedPerformanceCount,
-            'performances' => $performanceData
+            'performances' => $performanceData,
+            'unpublishedPerformanceCount' => $unpublishedPerformanceCount
         ]);
     }
 

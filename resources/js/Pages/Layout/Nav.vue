@@ -32,6 +32,7 @@
                                 <ul class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
                                     tabindex="0">
                                     <li>                                       
+                                        <Link :href="route('institution_profile')">Profile</Link>
                                         <button @click.prevent="logout">Logout</button>
                                     </li>
                                 </ul>
