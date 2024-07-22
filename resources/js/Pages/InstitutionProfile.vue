@@ -1,8 +1,19 @@
 <template>
     <Layout>
        <div>
-        <form autocomplete="off" @submit.prevent="submit" >
+        <div class="flex justify-between px-4">
             <p class="text-lg font-bold">UPDATE ข้อมูลผู้ประสานงาน</p>
+            <Link :href="route('index')" class="flex items-center gap-2">
+                <svg class="size-6" fill="none" stroke="currentColor" stroke-width="1.5"
+                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" stroke-linecap="round"
+                          stroke-linejoin="round"/>
+                </svg>
+                <p>กลับหน้าแรก</p>
+            </Link>
+        </div>
+        <form autocomplete="off" @submit.prevent="submit" >
+            <!-- <p class="text-lg font-bold">UPDATE ข้อมูลผู้ประสานงาน</p> -->
             <div class="bg-white p-8 shadow-lg rounded-xl">
                 <div class="mt-4">
                     <div>
