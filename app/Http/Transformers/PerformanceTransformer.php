@@ -43,12 +43,20 @@ class PerformanceTransformer extends TransformerAbstract
             'faculty_and_staff' => $performance->faculty_and_staff,
             'students' => $performance->students,
             'vehicles' => $performance->vehicles,
-            'arrival_date' => $performance->arrival_date ? $performance->arrival_date
-                ->format('Y-m-d') : null,
+
+            // 'arrival_date' => $performance->arrival_date ? $performance->arrival_date
+            //     ->format('Y-m-d') : null, 
+            'arrival_date' => $performance->arrival_date ? Carbon::parse($performance->arrival_date)
+                ->thaidate('j M Y') : null,
+
             'arrival_time' => $performance->arrival_time ? Carbon::parse($performance->arrival_time)
                 ->format('H:i') : null,
-            'departure_date' => $performance->departure_date ? $performance->departure_date
-                ->format('Y-m-d') : null,
+
+            // 'departure_date' => $performance->departure_date ? $performance->departure_date
+            //     ->format('Y-m-d') : null,
+            'departure_date' => $performance->departure_date ? Carbon::parse($performance->departure_date)
+                ->thaidate('j M Y') : null,
+
             'departure_time' => $performance->departure_time ? Carbon::parse($performance->departure_time)
                 ->format('H:i') : null,
             'accommodation' => $performance->accommodation,

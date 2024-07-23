@@ -140,17 +140,17 @@
                     <!-- Duration -->
                     <div class="grid grid-cols-12 gap-2">
                         <div class="col-span-6 lg:col-span-3">
-                            ระยะเวลาในการแสดง
+                            ระยะเวลาในการแสดง (ช.ม.)
                         </div>
                         <div class="col-span-6">
-                            {{ performance.duration }}
+                            {{ performance.duration }}  
                         </div>
                     </div>
 
                     <!-- Number of Performers -->
                     <div class="grid grid-cols-12 gap-2">
                         <div class="col-span-6 lg:col-span-3">
-                            จำนวนนักแสดง
+                            จำนวนนักแสดง 
                         </div>
                         <div class="col-span-6">
                             {{ performance.number_of_performers }}
@@ -160,7 +160,7 @@
                     <!-- Directors -->
                     <div class="grid grid-cols-12 gap-2">
                         <div class="col-span-6 lg:col-span-3">
-                            รายชื่อผู้ควบคุมการแสดง
+                            รายชื่อผู้ควบคุมการแสดง 
                         </div>
                         <div class="col-span-6">
                             {{ performance.directors }}
@@ -170,7 +170,7 @@
                     <!-- Performers -->
                     <div class="grid grid-cols-12 gap-2">
                         <div class="col-span-6 lg:col-span-3">
-                            รายชื่อนักแสดง
+                            รายชื่อนักแสดง 
                         </div>
                         <div class="col-span-6">
                             {{ performance.performers }}
@@ -180,7 +180,7 @@
                     <!-- Musicians or Narrators -->
                     <div class="grid grid-cols-12 gap-2">
                         <div class="col-span-6 lg:col-span-3">
-                            รายชื่อนักดนตรี/ผู้พากย์หรือผู้บรรยาย
+                            รายชื่อนักดนตรี/ผู้พากย์หรือผู้บรรยาย 
                         </div>
                         <div class="col-span-6">
                             {{ performance.musicians_or_narrators }}
@@ -190,7 +190,7 @@
                     <!-- Number of Musicians -->
                     <div class="grid grid-cols-12 gap-2">
                         <div class="col-span-6 lg:col-span-3">
-                            จำนวนนักดนตรี
+                            จำนวนนักดนตรี 
                         </div>
                         <div class="col-span-6">
                             {{ performance.number_of_musicians }}
@@ -230,7 +230,7 @@
                     <!-- Costume and Props -->
                     <div class="grid grid-cols-12 gap-2">
                         <div class="col-span-6 lg:col-span-3">
-                            ลักษณะการแต่งกายและอุปกรณ์ประกอบการแสดง (MAKE UP & COSTUME, PROPS)
+                            ลักษณะการแต่งกายและอุปกรณ์ประกอบการแสดง 
                         </div>
                         <div class="col-span-6">
                             {{ performance.costume_and_props }}

@@ -3,7 +3,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="card bg-blue-300 shadow-xl">
             <div class="card-body">
-                <h2 class="card-title text-blue-600">Show ทั้งหมด</h2>
+                <h2 class="card-title text-blue-600">ลงทะเบียนทั้งหมด</h2>
                 <div class="flex w-full justify-end">
                     <div class="text-4xl font-bold">{{ performanceCount }}</div>
                 </div>
@@ -87,9 +87,9 @@ export default {
             type: Array,
             required: true
         },
-        performance:{
+        unpublishedPerformanceCount:{
             type: Number,
-            required: true
+            required: false
         }
     },
     mounted() {
